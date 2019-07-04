@@ -1,0 +1,143 @@
+<resources>
+    <string name="app_name">Hashi Sushi Admin</string>
+    <string name="txt_user">E-mail:</string>
+    <string name="txt_password">Senha:</string>
+    <string name="btn_login">ENTRAR</string>
+    <string name="btn_pedidos">PEDIDOS</string>
+    <string name="btn_produto">PRODUTOS</string>
+    <string name="btn_cad_prod">CASDASTRO DE PRODUTO</string>
+    <string name="btn_cad_prod_edit">EDITAR PRODUTO</string>
+    <string name="txt_name">Hashi Sushi</string>
+    <string name="hide_email">Informe seu e-mail</string>
+    <string name="hint_password">Informe sua senha</string>
+    <string name="promotions">PEDIDOS</string>
+    <string name="txt_search">Buscar prato:</string>
+    <string name="txt_menu_sales">CARDAPÍO</string>
+    <string name="hint_seach_plate">Informe o prato para busca</string>
+    <string name="txt_list_plate">Pratos e Bebidas</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="rua_aparecida">Informe seu endereço</string>
+    <string name="_99">Informe seu número</string>
+    <string name="neighborhood">Bairro:</string>
+    <string name="reference">Ponto de referência</string>
+    <string name="referencepoint">Informe seu ponto de referência</string>
+    <string name="jardim_nova_alianca">Informe seu bairro</string>
+    <string name="city">Cidade</string>
+    <string name="vargem_grande_do_sul">Vargem Grande do Sul</string>
+    <string name="cep">CEP:</string>
+    <string name="state">Estado:</string>
+    <string name="_13870_001">13870-001</string>
+    <string name="sao_paulo">São Paulo</string>
+    <string name="female">Feminino</string>
+    <string name="male">Masculino</string>
+    <string name="e_mail">E-mail:</string>
+    <string name="your_email">Informe seu e-mail</string>
+    <string name="whatsapp">Contato:</string>
+    <string name="_19_99999_9999">Informe seu celular</string>
+    <string name="finalizar">Finalizar</string>
+    <string name="preencha_os_campos">Por favor preencha os campos solicitados</string>
+    <string name="password">Informe sua senha</string>
+    <string name="password_RETYPE">Repita sua senha</string>
+    <string name="pass">Senha:</string>
+    <string name="your_password">Informe o sua senha!</string>
+    <string name="your_phone">Informe o seu celular!</string>
+    <string name="your_email2">Informe o seu E-mail!</string>
+    <string name="your_cpf">Informe o seu CPF!</string>
+    <string name="your_name">Informe o seu nome!</string>
+    <string name="registration_completed"> O seu cadastrado foi concluído com sucesso! :)</string>
+    <string name="registration_error">Cadastrado não realizado houve algum erro! :s</string>
+    <string name="login_load">Aguarde validação de login... </string>
+    <string name="my_points">Meus Pontos</string>
+    <string name="code">Código:</string>
+    <string name="_2071">2071</string>
+    <string name="client">Cliente:</string>
+    <string name="marcos_f_c_rangel">Marcos F C Rangel</string>
+    <string name="points">Pontos:</string>
+    <string name="_8">0</string>
+    <string name="txt_open">Estamos Atendeno:</string>
+    <string name="txt_close">Não estamos atendeno.</string>
+    <string name="txt_order">Pedido</string>
+    <string name="txt_orders">Itens do Pedido:</string>
+    <string name="ridio_btn_Delivery">Entregar</string>
+    <string name="radio_btn_withdraw">Retirar</string>
+    <string name="txt_total">0</string>
+    <string name="btn_final">Finalizar Pedido</string>
+    <string name="txt_type_payment">Pagar com:</string>
+    <string name="txt_change_to">Troco para:</string>
+    <string name="hint_total">Total:</string>
+    <string name="title_activity_act_cardap">Cardapio</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_act_cardapio">Cardápio</string>
+
+    <string-array name="titles_tab">
+        <item>ENTRADA</item>
+        <item>PRATOS QUENTES</item>
+        <item>PRATOS FRIOS</item>
+        <item>TEMAKIS</item>
+        <item>COMBO</item>
+        <item>BEBIDAS</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="txt_enter">ENTRADA</string>
+    <string name="txt_plat_hot">PRATOS</string>
+    <string name="txt_plat_ace">MONTE SEU PRATOS</string>
+    <string name="txt_portions">PORÇÔES</string>
+    <string name="txt_temakis">TEMAKIS</string>
+    <string name="txt_combo">COMBO</string>
+    <string name="txt_driks">BEBIDAS E SUCOS</string>
+    <string name="btn_rescue">Resgatar Pontos</string>
+    <string name="txt_remember_password">Lembrar-me</string>
+    <string name="title_activity_navigation">Navigation</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_pont">MEUS PONTOS</string>
+    <string name="txt_regirter_prod">Cadastro de produto</string>
+    <string name="txt_number_prod">Nº Produto</string>
+    <string name="hint_name_prod">Informe o nome do produto</string>
+    <string name="txt_name_prod">Nome do Produto:</string>
+    <string name="txt_decrition">Descrição:</string>
+    <string name="txt_price_prod">Valor R$:</string>
+    <string name="txt_type">Selecione o tipo:</string>
+    <string name="txt_Is_promotion">Esta em promoção:</string>
+    <string name="txt_url_img">URL imagem produto:</string>
+    <string name="txt_splash">Fast Delivery</string>
+    <string name="txt_splash_fone">19 9.8605-6578</string>
+    <string name="vgs">Vargem Grande do Sul</string>
+    <string name="SP">São Paulo</string>
+    <string name="we_are_not_open">Não estamos atendendo agora!</string>
+    <string name="we_are_open_now">Estamos atendendo!</string>
+    <string name="app_finished">Hashi Sushi Finalizado!</string>
+    <string name="please_type_password">Por favor, preencha esse campo!</string>
+    <string name="please_type_email">Por favor, preencha esse campo!</string>
+    <string name="type_email_and_pass">Por favor, informe e-mail e senha para acessar ou cadastre-se.</string>
+    <string name="user_not_loged">Usuário não esta Logado !</string>
+    <string name="user_loged">Usuário Logado!</string>
+    <string name="error_to_access">Falha ao acessar o app! =[</string>
+    <string name="welcome">Bem vindo! =]</string>
+    <string name="email_rememberd">Seu e-mail será lembrado!</string>
+    <string name="email_not_rememberd">Seu e-mail não será lembrado!</string>
+    <string name="pass_not_equals">As senhas devem ser idênticas</string>
+    <string name="pass_not_equals2">As senhas não conferem :s</string>
+    <string name="try_another_pass">Tente outra senha</string>
+    <string name="wrong_pass">A senha deve conter no mínimo 6 caracteres :s</string>
+    <string name="menu_entrada">Entrada</string>
+    <string name="menu_edtcadastro">EDITAR CADASTRO</string>
+    <string name="menu_cad_prod">CADASTRAR PRODUTO</string>
+    <string name="txt_car_item">Ver Carrinho:</string>
+    <string name="txt_quant_item">Qt:</string>
+    <string name="txt_qt">0</string>
+    <string name="txt_total_order">R$:</string>
+    //key face login
+</resources>
