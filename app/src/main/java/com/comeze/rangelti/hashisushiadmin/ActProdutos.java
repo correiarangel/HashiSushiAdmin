@@ -2,6 +2,7 @@ package com.comeze.rangelti.hashisushiadmin;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
@@ -20,7 +21,6 @@ import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
 import com.comeze.rangelti.hashisushiadmin.model.Product;
 import com.comeze.rangelti.hashisushiadmin.model.User;
-import com.google.android.gms.common.util.Strings;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -92,7 +92,11 @@ public class ActProdutos extends AppCompatActivity {
 
                             @Override
                             public void onLongItemClick(View view, int position) {
-                                //Product produtoSelecionado = productsList.get(position);
+
+                                Product produtoSelecionado = productsList.get(position);
+
+                                confirmExclusao(produtoSelecionado);
+
                                 // msgShort("Produto :"+produtoSelecionado);
                             }
 
@@ -208,6 +212,38 @@ public class ActProdutos extends AppCompatActivity {
         Intent it = new Intent(this, ActRegProd.class);
         it.putExtra("PRODUTO_ENV", product);
         startActivity(it);
+    }
+
+    //comfirmar item com dialog
+    private void confirmExclusao(final Product product )
+    {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Excluir Produto"+product.getName());
+        alert.setMessage("Confirma exclusão ? ");
+
+
+        alert.setPositiveButton("Confirmar", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                product.remover(product.getIdInterno());
+                msgShort("Excluido !");
+
+            }
+        });
+
+        alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                msgShort("Exclusão cancelada");
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 
 

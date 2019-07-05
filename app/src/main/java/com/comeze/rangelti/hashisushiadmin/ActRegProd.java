@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.dao.FirebaseConfig;
-import com.comeze.rangelti.hashisushiadmin.dao.ProductDao;
 import com.comeze.rangelti.hashisushiadmin.model.Product;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -60,7 +59,7 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
     private static final int SELECAO_GALERIA = 200;
     private StorageReference storageReference;
     private DatabaseReference firebaseReference;
-    private String idUsuarioLogado;
+    private String idIntenoProduto;
     private String urlImagemSelecionada = "";
     private String ID_PRODUTO_RECEBIDO;
     private Product product;
@@ -236,9 +235,12 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
         String numberProd =  edtNumberPro.getText().toString();
         String name = edtNameProd.getText().toString();
         String valProd  = edtValProd.getText().toString();
+        String url  = edtUrl.getText().toString();
 
-        if(descricao.equals("") && numberProd.equals("") && name.equals("") && valProd.equals("")){
-            msgShort("Há campos sem valor;preencha todos os campos !");
+        if(descricao.equals("") && numberProd.equals("") && name.equals("") &&
+                url.equals("")  && valProd.equals(""))
+        {
+            msgShort("Há campos sem valor;Preencha todos os campos !");
         }else {
             try {
                 Product p = new Product();
@@ -247,6 +249,7 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
                 p.setDescription(edtDiscriptionProd.getText().toString());
                 p.setSalePrice(edtValProd.getText().toString());
                 p.setIdProd(edtNumberPro.getText().toString());
+                p.setIdInterno(idIntenoProduto);
 
                 String strProm = spnIsPrmotion.getSelectedItem().toString();
 
@@ -256,10 +259,16 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 
                 String strType = spnType.getSelectedItem().toString();
                 p.setType(strType);
+
                 p.setImgUrl(edtUrl.getText().toString());
 
-                ProductDao productDao = new ProductDao();
-                productDao.addProduct(p);
+                //caso receba um produto edita
+                if(extrasProd != null){
+                    p.atualisar(idIntenoProduto);
+                }else {
+                    p.salvar();
+                }
+
                 msgShort("Produto salvo com sucesso!..");
 
                 clearFilds();
@@ -338,6 +347,8 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 
         if(extrasProd!=null ){
         product = (Product) extrasProd.getSerializable("PRODUTO_ENV");
+
+            idIntenoProduto = product.getIdInterno();
 
             edtNameProd.setText(product.getName());
             edtDiscriptionProd.setText(product.getDescription());

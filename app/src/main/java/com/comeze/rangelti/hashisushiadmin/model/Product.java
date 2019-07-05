@@ -1,11 +1,15 @@
 package com.comeze.rangelti.hashisushiadmin.model;
 
+import com.comeze.rangelti.hashisushiadmin.dao.FirebaseConfig;
+import com.google.firebase.database.DatabaseReference;
+
 import java.io.Serializable;
 
 public class Product implements Serializable {
 
     private String description;
     private String idProd;
+    private String idInterno;
     private Boolean isPromotion;
     private String name;
     private String salePrice;
@@ -15,6 +19,46 @@ public class Product implements Serializable {
 
     public Product() {
 
+    }
+
+    public void salvar(){
+
+        DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
+        DatabaseReference produtoRef = firebaseRef
+                .child("product")
+                .push();
+
+        //pega retorno de id gerado com push
+        String internoId = produtoRef.getKey();
+        setIdInterno(internoId);
+
+        produtoRef.setValue(this);
+
+    }
+
+    public void atualisar(String id){
+
+        DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
+        DatabaseReference produtoRef = firebaseRef
+                .child("product")
+                .child( id );
+        produtoRef.setValue(this);
+    }
+
+    public void remover(String id){
+        DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
+        DatabaseReference produtoRef = firebaseRef
+                .child("product")
+                .child( id );
+        produtoRef.removeValue();
+    }
+
+    public String getIdInterno() {
+        return idInterno;
+    }
+
+    public void setIdInterno(String idInterno) {
+        this.idInterno = idInterno;
     }
 
     public String getDescription() {
