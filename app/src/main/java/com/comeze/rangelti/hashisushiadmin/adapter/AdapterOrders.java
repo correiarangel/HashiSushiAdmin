@@ -111,4 +111,11 @@ public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHol
         }
     }
 
+    public void updateListOrdes(int position){
+
+        this.ordersList.remove(position);
+        notifyDataSetChanged();
+
+    }
+
 }

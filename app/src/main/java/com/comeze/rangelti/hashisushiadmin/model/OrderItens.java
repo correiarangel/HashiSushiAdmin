@@ -43,9 +43,14 @@ public class OrderItens  implements Serializable {
     public void setItenSalePrice(String itenSalePrice) {
         this.itenSalePrice = itenSalePrice;
     }
-    
+
     @Override
-    public String toString ( ) {
-        return "Produto: " + nameProduct + '\n' + "Quantidade: " + quantity;
+    public String toString() {
+        return "OrderItens{" +
+                "idProduct='" + idProduct + '\'' +
+                ", nameProduct='" + nameProduct + '\'' +
+                ", quantity=" + quantity +
+                ", itenSalePrice='" + itenSalePrice + '\'' +
+                '}';
     }
 }
