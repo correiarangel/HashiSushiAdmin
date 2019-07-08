@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.comeze.rangelti.hashisushiadmin.model.Product;
 import com.comeze.rangelti.hashisushiadmin.R;
-
+import com.comeze.rangelti.hashisushiadmin.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
