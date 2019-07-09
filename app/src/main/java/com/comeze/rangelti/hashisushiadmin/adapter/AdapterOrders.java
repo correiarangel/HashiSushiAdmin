@@ -11,12 +11,14 @@ import android.widget.TextView;
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.model.Orders;
 
+
 import java.util.List;
 
 public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHolder> {
 
     private List<Orders> ordersList;
     private Context context;
+
 
     public AdapterOrders(List<Orders> ordersList, Context context) {
         this.ordersList = ordersList;
@@ -37,8 +39,8 @@ public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHol
 
         Orders orders = ordersList.get(i);
 
-        holder.idOrders.setText("Codigo :" + orders.getIdOrders());
-        holder.idUser.setText("Codigo Cliente :" + orders.getIdUser());
+        holder.idOrders.setText("Cod Pedido :" + orders.getIdOrders());
+        holder.idUser.setText("Cod Cliente :" + orders.getIdUser());
         holder.name.setText("Nome :" + orders.getName());
         holder.address.setText("End:" + orders.getAddress());
         holder.numberHome.setText("Numero :" + orders.getNumberHome());
@@ -50,10 +52,13 @@ public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHol
         holder.quantProd.setText("Qt itens :" + orders.getQuantProd());
         holder.discont.setText("Desconto :" + orders.getDiscont());
         holder.status.setText("Status :" + orders.getStatus());
-        holder.ordersItens.setText("Order itens :" + orders.getOrderItens());
         holder.totalPrince.setText("Total do Pedido:" + orders.getTotalPrince());
 
+
     }
+
+
+
 
     @Override
     public int getItemCount() {
@@ -75,13 +80,7 @@ public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHol
         TextView quantProd;
         TextView discont;
         TextView status;
-
-     /*   TextView idProduct;
-        TextView nameProduct;
-        TextView quantityIntensProd;
-        TextView itenSalePrice;*/
-
-        TextView ordersItens;
+        TextView txtordersItens;
         TextView totalPrince;
         TextView observation;
 
@@ -103,11 +102,7 @@ public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHol
             totalPrince = itemView.findViewById(R.id.txtTotalPrince);
             observation = itemView.findViewById(R.id.txtObservation);
             status = itemView.findViewById(R.id.txtStatus);
-         /*   idProduct = itemView.findViewById(R.id.txtIdProd);
-            nameProduct = itemView.findViewById(R.id.txtNomeProd);
-            quantityIntensProd = itemView.findViewById(R.id.txtQuantityItensProd);
-            itenSalePrice = itemView.findViewById(R.id.txtItenSalePrice);*/
-            ordersItens = itemView.findViewById(R.id.txtOrdersItens);
+
         }
     }
 

@@ -33,6 +33,7 @@ import com.comeze.rangelti.hashisushiadmin.adapter.AdapterOrders;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterProduct;
 import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
+import com.comeze.rangelti.hashisushiadmin.model.OrderItens;
 import com.comeze.rangelti.hashisushiadmin.model.Orders;
 import com.comeze.rangelti.hashisushiadmin.model.Product;
 import com.comeze.rangelti.hashisushiadmin.model.User;
@@ -49,7 +50,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import dmax.dialog.SpotsDialog;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ActPedidos extends AppCompatActivity implements View.OnClickListener {
@@ -60,6 +60,7 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
 
     private DatabaseReference reference;
     private List<Orders> ordersList = new ArrayList<>();
+    private List<OrderItens> itensList = new ArrayList<>();
     private RecyclerView list_Orders;
     private AdapterOrders adapterOrders;
     private AdapterProduct adapterProduct;
@@ -69,7 +70,7 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
     private User user;
     private Orders orders;
     private FirebaseAuth auth;
-    private Orders ordersRecovery;
+
 
 
     @Override
@@ -79,7 +80,7 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
 
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
-        bar.setTitle("");
+        bar.setTitle("Pedidos");
         //getSupportActionBar().hide();
 
         //Travæ rotaçãø da tela
@@ -93,7 +94,6 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
 
         recyclerViewConfig();
         recycleOnclick();
-
         listesnerEventPedidos();
 
        // initSearch();
@@ -114,15 +114,23 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                               Orders  pedidoSelecionado = ordersList.get(position);
-                               confirmStatus(pedidoSelecionado,position);
+
+                                Orders  pedidoSelecionado = ordersList.get(position);
+                                confirmStatus(pedidoSelecionado,position);
 
                             }
 
                             @Override
                             public void onLongItemClick(View view, int position) {
-                                //Product produtoSelecionado = productsList.get(position);
-                                // msgShort("Produto :"+produtoSelecionado);
+
+                                Orders  pedidoSelecionado = ordersList.get(position);
+
+                                String idOrder =  pedidoSelecionado.getIdOrders();
+                                //envia id order para actItensOrder
+                                System.setProperty("ID_ORDER",idOrder );
+                                //chama actItensOrder
+                                startItem();
+
                             }
 
                             @Override
@@ -183,14 +191,15 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
         list_Orders.setHasFixedSize(true);
         adapterOrders = new AdapterOrders(ordersList, this);
         list_Orders.setAdapter(adapterOrders);
+
     }
+
 
     private void startComponet()
     {
 
-        txtPedidos = findViewById(R.id.txtPedidos);
         //RecyclerView---
-        list_Orders = findViewById(R.id.list_produsts);
+        list_Orders = findViewById(R.id.list_Orders);
 
     }
 
@@ -225,39 +234,6 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
     }
 
 
-
-    public void initSearch()
-    {
-        //retorna usuarios
-        DatabaseReference pedidosDB = reference.child("orders");
-        //retorna o no setado
-        final Query querySearch = pedidosDB.orderByChild("status").equalTo("confirmado");
-
-        //cria um ouvinte
-        querySearch.addValueEventListener(new ValueEventListener()
-        {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-            {
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren())
-                {
-                    Orders orders = objSnapshot.getValue(Orders.class);
-                    //System.out.println("PEDIDO-------  "+o);
-                    ordersList.add(orders);
-                }
-                adapterOrders.notifyDataSetChanged();
-                listesnerEventPedidos();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError)
-            {
-                msgShort("Houve algum erro:" + databaseError);
-            }
-        });
-    }
-
     public void listesnerEventPedidos(){
 
         //retorna usuarios
@@ -270,13 +246,12 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Orders orders = dataSnapshot.getValue(Orders.class);
 
+
                 ordersList.add(orders);
 
                 adapterOrders.notifyDataSetChanged();
 
-                System.out.println("PEDIDO CHEGOU-------  "+orders);
                 notificacao();
-
             }
 
             @Override
@@ -312,17 +287,6 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
     }
 
 
-
-    private int validaQuantidade(String valor) {//valida se o valor digitado é numérico
-        String regexStr = "^[0-9]*$";
-        if (!valor.trim().matches(regexStr))
-        {
-            msgShort("Por favor, informe um valor numérico!");
-            return 1;
-        }
-        else return 0;
-    }
-
     //recupera dados do usuario esta com
     private void recoveryDataUser()
     {
@@ -347,42 +311,48 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-private void notificacao(){
 
 
-    NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-    PendingIntent p = PendingIntent.getActivity(this,0, new Intent(),0 );
-    // PendingIntent p = PendingIntent.getActivity(this,0, new Intent(this,ActLivroRenovar.class),0 );
-
-    NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-    builder.setTicker("Pedido Novo");
-    builder.setContentTitle(" Chegou Pedido !");
-
-    builder.setSmallIcon(R.mipmap.ic_launcher);
-    builder.setLargeIcon(BitmapFactory.decodeResource(getResources() ,R.mipmap.ic_launcher));
-    builder.setContentIntent(p);
-
-    NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
-    String[] descs = new String[]{"Cheque a lista de pedido um novo pedido chegou !"};
-    for(int i = 0;i < descs.length; i++){
-        style.addLine(descs[i]);
-    }
-    builder.setStyle(style);
-
-    Notification no = builder.build();
-    no.vibrate = new long[]{150,300,150};
-    no.flags = Notification.FLAG_AUTO_CANCEL;
-    nm.notify(R.mipmap.ic_launcher,no);
-
-    try {
-        Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Ringtone toque = RingtoneManager.getRingtone(this,som);
-        toque.play();
-    }catch (Exception e){
-
-        System.out.println("Erro ao gerar toque notificação : "+e);
-    }
+private void startItem(){
+    Intent it = new Intent(this, ActItensOrder.class);
+    startActivity(it);
 }
 
+    private void notificacao( ){
+
+
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        PendingIntent p = PendingIntent.getActivity(this,0, new Intent(),0 );
+        // PendingIntent p = PendingIntent.getActivity(this,0, new Intent(this,ActLivroRenovar.class),0 );
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setTicker("Pedido Novo");
+        builder.setContentTitle(" Chegou Pedido !");
+
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources() ,R.mipmap.ic_launcher));
+        builder.setContentIntent(p);
+
+        NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
+        String[] descs = new String[]{"Cheque a lista de pedido um novo pedido chegou !"};
+        for(int i = 0;i < descs.length; i++){
+            style.addLine(descs[i]);
+        }
+        builder.setStyle(style);
+
+        Notification no = builder.build();
+        no.vibrate = new long[]{150,300,150};
+        no.flags = Notification.FLAG_AUTO_CANCEL;
+        nm.notify(R.mipmap.ic_launcher,no);
+
+        try {
+            Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone toque = RingtoneManager.getRingtone(this,som);
+            toque.play();
+        }catch (Exception e){
+
+            System.out.println("Erro ao gerar toque notificação : "+e);
+        }
+    }
 
 }

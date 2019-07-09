@@ -240,7 +240,6 @@ public class Orders implements Serializable {
                 ", quantProd=" + quantProd +
                 ", discont=" + discont +
                 ", totalPrince='" + totalPrince + '\'' +
-                ", orderItens=" + orderItens +
                 ", observation='" + observation + '\'' +
                 ", status='" + status + '\'' +
                 '}';

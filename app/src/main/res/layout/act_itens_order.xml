@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorSmoky"
-    tools:context=".ActPedidos">
+    tools:context=".ActItensOrder">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_Orders"
+        android:id="@+id/list_Itens_Orders"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -22,6 +22,5 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>
