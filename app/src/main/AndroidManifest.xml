@@ -12,12 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActItensOrder"></activity>
-        <activity android:name=".ActProdutos" />
-        <activity android:name=".ActRegProd" />
-        <activity android:name=".ActPedidos" />
-        <activity android:name=".ActHome" />
-        <activity android:name=".ActLogin">
+        <activity android:name=".views.ActItensOrder"></activity>
+        <activity android:name=".views.ActProdutos" />
+        <activity android:name=".views.ActRegProd" />
+        <activity android:name=".views.ActPedidos" />
+        <activity android:name=".views.ActHome" />
+        <activity android:name=".views.ActLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

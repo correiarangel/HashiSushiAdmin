@@ -1,4 +1,4 @@
-package com.comeze.rangelti.hashisushiadmin;
+package com.comeze.rangelti.hashisushiadmin.views;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.comeze.rangelti.hashisushiadmin.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;

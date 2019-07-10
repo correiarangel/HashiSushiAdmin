@@ -1,4 +1,4 @@
-package com.comeze.rangelti.hashisushiadmin;
+package com.comeze.rangelti.hashisushiadmin.views;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,19 +14,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 
+import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterItensPedido;
-import com.comeze.rangelti.hashisushiadmin.adapter.AdapterOrders;
-import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
 import com.comeze.rangelti.hashisushiadmin.model.OrderItens;
 import com.comeze.rangelti.hashisushiadmin.model.Orders;
-import com.comeze.rangelti.hashisushiadmin.model.Product;
-import com.comeze.rangelti.hashisushiadmin.model.User;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

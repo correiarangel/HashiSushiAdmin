@@ -1,4 +1,4 @@
-package com.comeze.rangelti.hashisushiadmin;
+package com.comeze.rangelti.hashisushiadmin.views;
 
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterOrders;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterProduct;
 import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
@@ -149,10 +150,10 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Status do pedido : "+pedidoSelecionado.getStatus());
-        alert.setMessage("\nConfirma statatus para ,produção. ");
+        alert.setMessage("\nConfirme statatus do pedido. ");
 
         final EditText edtStatus = new EditText(this);
-        edtStatus.setText("produção");
+        edtStatus.setText("em preparo");
 
         alert.setView(edtStatus);
 

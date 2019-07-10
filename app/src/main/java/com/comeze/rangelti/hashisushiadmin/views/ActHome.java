@@ -1,4 +1,4 @@
-package com.comeze.rangelti.hashisushiadmin;
+package com.comeze.rangelti.hashisushiadmin.views;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.comeze.rangelti.hashisushiadmin.R;
 
 public class ActHome extends AppCompatActivity implements View.OnClickListener {
 
