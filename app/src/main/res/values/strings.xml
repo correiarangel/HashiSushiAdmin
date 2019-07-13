@@ -16,6 +16,14 @@
     <string name="hint_seach_plate">Informe o prato para busca</string>
     <string name="txt_list_plate">Pratos e Bebidas</string>
     <string name="cadastro">Cadastro</string>
+    <string name="full_name">Nome:</string>
+    <string name="joao_da_silva">Informe seu nome</string>
+    <string name="cpf">CPF:</string>
+    <string name="bord_date">Nascimento:</string>
+    <string name="_123_456_789_01">Informe seu CPF</string>
+    <string name="_01_01_2019">Informe sua data de nasc.</string>
+    <string name="endere_o">Endereço de entrega:</string>
+    <string name="number">Número:</string>
     <string name="rua_aparecida">Informe seu endereço</string>
     <string name="_99">Informe seu número</string>
     <string name="neighborhood">Bairro:</string>
@@ -145,7 +153,8 @@
     <string name="menu_produtos">PRODUTOS</string>
     <string name="menu_usuarios">USUARIOS</string>
     <string name="menu_cadastrar_prod">CADATRAR PRODUTO</string>
-    <string name="menu_cadastrar_user">CADASTRAR USUARIO</string>
+    <string name="menu_editar_user">EDITAR USUARIO</string>
     <string name="menu_info">INFO</string>
-    //key face login
+    <string name="txt_is_adm">É administrador:</string>
+
 </resources>

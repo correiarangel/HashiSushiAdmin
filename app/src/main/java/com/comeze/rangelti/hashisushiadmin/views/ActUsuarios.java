@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
@@ -58,8 +60,10 @@ public class ActUsuarios extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_usuarios);
+
         ActionBar bar = getSupportActionBar();
-        bar.setTitle("");
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+        bar.setTitle("Usuarios");
 
         startComponet();
         initDB();
@@ -89,7 +93,7 @@ public class ActUsuarios extends AppCompatActivity {
 
                                 String idUser = userSelecionado.getIdUser();
 
-                                System.setProperty("ID_PRODUTO",idUser );
+                                System.setProperty("ID_USER_ENV",idUser );
                                 startEditUser(userSelecionado);
                             }
 
@@ -206,10 +210,11 @@ public class ActUsuarios extends AppCompatActivity {
             }
         });
     }
-    private void startEditUser( User user ){
-        //Intent it = new Intent(this, ActCadastraUser.class);
-        //it.putExtra("USER_ENV", user);
-        //startActivity(it);
+    private void startEditUser( User user )
+    {
+        Intent it = new Intent(this, ActEditarUser.class);
+        it.putExtra("USER_ENV", user);
+        startActivity(it);
     }
 
     //comfirmar item com dialog
@@ -261,7 +266,7 @@ public class ActUsuarios extends AppCompatActivity {
 
         if (id == R.id.menu_produtos)
         {
-            Intent it = new Intent(this, ActPedidosConfirm.class);
+            Intent it = new Intent(this, ActProdutos.class);
             startActivity(it);
             finish();
             return true;
@@ -269,7 +274,7 @@ public class ActUsuarios extends AppCompatActivity {
 
         if (id == R.id.menu_usuarios)
         {
-            finish();
+            msgShort("Já estamos em Usuarios");
             return true;
         }
 
@@ -281,14 +286,8 @@ public class ActUsuarios extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.menu_cadastrar_user)
-        {
-            finish();
-            return true;
-        }
         if (id == R.id.menu_pedidos)
         {
-            finish();
             return true;
         }
         if (id == R.id.menu_pedidos_confirm)

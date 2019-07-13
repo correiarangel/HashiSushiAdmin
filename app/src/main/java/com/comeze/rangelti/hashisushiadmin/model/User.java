@@ -36,6 +36,23 @@ public class User implements Serializable {
         usuarioRef.setValue(this);
     }
 
+    public void atualisarUser(String id){
+
+        DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
+        DatabaseReference produtoRef = firebaseRef
+                .child("users")
+                .child( id );
+        produtoRef.setValue(this);
+    }
+
+    public void removerUser(String id){
+        DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
+        DatabaseReference produtoRef = firebaseRef
+                .child("user")
+                .child( id );
+        produtoRef.removeValue();
+    }
+
     public String getIdUser() {
         return idUser;
     }

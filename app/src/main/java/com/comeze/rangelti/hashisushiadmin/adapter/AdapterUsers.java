@@ -52,6 +52,7 @@ public class AdapterUsers extends
         holder.isAdmin.setText("Administardor :"+ user.getIsAdmin());
         holder.ponts.setText("Pontos :"+ user.getPonts());
         holder.password.setText("Senha :"+ user.getPassword());
+        holder.referencePoint.setText("Ponto de referencia :"+ user.getReferencePoint());
     }
 
     @Override

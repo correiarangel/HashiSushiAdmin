@@ -386,6 +386,8 @@ private void startItem(){
 
         if (id == R.id.menu_usuarios)
         {
+            Intent it = new Intent(this, ActUsuarios.class);
+            startActivity(it);
             finish();
             return true;
         }
@@ -397,22 +399,14 @@ private void startItem(){
             finish();
             return true;
         }
-
-        if (id == R.id.menu_cadastrar_user)
-        {
-            finish();
-            return true;
-        }
         if (id == R.id.menu_pedidos)
         {
-            finish();
+
             return true;
         }
         if (id == R.id.menu_pedidos_confirm)
         {
-            Intent it = new Intent(this, ActPedidosConfirm.class);
-            startActivity(it);
-            finish();
+            msgShort("Já estamos em Pedidos confirmados !");
             return true;
         }
         if (id == R.id.menu_home)

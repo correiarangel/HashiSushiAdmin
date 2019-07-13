@@ -217,6 +217,7 @@ public class ActLogin extends AppCompatActivity implements View.OnClickListener 
         {
             Intent it = new Intent(this, ActHome.class);
             startActivity(it);
+            finish();
         }
 
     }

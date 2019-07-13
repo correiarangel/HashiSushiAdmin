@@ -36,12 +36,6 @@
         android:title="@string/menu_cadastrar_prod"
         android:visible="true"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_cadastrar_user"
-        android:orderInCategory="100"
-        android:title="@string/menu_cadastrar_user"
-        android:visible="true"
-        app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_info"

@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -63,7 +65,8 @@ public class ActProdutos extends AppCompatActivity {
         setContentView(R.layout.act_produtos);
 
         ActionBar bar = getSupportActionBar();
-        bar.setTitle("");
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+        bar.setTitle("Produtos");
 
         startComponet();
         initDB();
@@ -271,14 +274,15 @@ public class ActProdutos extends AppCompatActivity {
 
         if (id == R.id.menu_produtos)
         {
-            Intent it = new Intent(this, ActPedidosConfirm.class);
-            startActivity(it);
-            finish();
+
+            msgShort("Já estamos em Produtos");
             return true;
         }
 
         if (id == R.id.menu_usuarios)
         {
+            Intent it = new Intent(this, ActUsuarios.class);
+            startActivity(it);
             finish();
             return true;
         }
@@ -290,15 +294,9 @@ public class ActProdutos extends AppCompatActivity {
             finish();
             return true;
         }
-
-        if (id == R.id.menu_cadastrar_user)
-        {
-            finish();
-            return true;
-        }
         if (id == R.id.menu_pedidos)
         {
-            finish();
+
             return true;
         }
         if (id == R.id.menu_pedidos_confirm)

@@ -3,15 +3,19 @@ package com.comeze.rangelti.hashisushiadmin.views;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
 
@@ -26,8 +30,14 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_home);
+
+        ActionBar bar = getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+        bar.setTitle("Hashi Sushi Admin");
+
         initComponet();
     }
+
     private void initComponet()
     {
         btnCadProd = findViewById(R.id.btnCdaProd);
@@ -70,7 +80,7 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
     {
         // cria um obj atvib que recebe seu valor de context
         Vibrator atvib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        atvib.vibrate(time);
+        atvib.vibrate( time );
     }
 
     //==> MENUS
@@ -90,9 +100,8 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
 
         if (id == R.id.menu_produtos)
         {
-            Intent it = new Intent(this, ActPedidosConfirm.class);
+            Intent it = new Intent(this, ActProdutos.class);
             startActivity(it);
-            finish();
             return true;
         }
 
@@ -100,8 +109,6 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
         {
             Intent it = new Intent(this, ActUsuarios.class);
             startActivity(it);
-
-            finish();
             return true;
         }
 
@@ -109,38 +116,32 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
         {
             Intent it = new Intent(this, ActRegProd.class);
             startActivity(it);
-            finish();
-            return true;
-        }
-
-        if (id == R.id.menu_cadastrar_user)
-        {
-            finish();
             return true;
         }
         if (id == R.id.menu_pedidos)
         {
-            finish();
             return true;
         }
         if (id == R.id.menu_pedidos_confirm)
         {
             Intent it = new Intent(this, ActPedidosConfirm.class);
             startActivity(it);
-            finish();
+
             return true;
         }
         if (id == R.id.menu_home)
         {
-            Intent it = new Intent(this, ActHome.class);
-            startActivity(it);
-            finish();
+
+            msgShort("Já estamos em Home !");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-
+    private void msgShort(String msg)
+    {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
 
 }

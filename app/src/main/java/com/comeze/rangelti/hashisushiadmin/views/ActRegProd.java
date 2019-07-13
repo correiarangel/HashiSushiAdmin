@@ -3,13 +3,16 @@ package com.comeze.rangelti.hashisushiadmin.views;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -66,7 +69,10 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	protected void onCreate ( Bundle savedInstanceState ) {
 		super.onCreate ( savedInstanceState );
 		setContentView ( R.layout.act_reg_prod );
-		getSupportActionBar ( ).hide ( );
+
+		ActionBar bar = getSupportActionBar();
+		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+		bar.setTitle("Cadastrar Produto");
 		
 		startCompnent ( );
 		
@@ -248,12 +254,13 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 				p.setSalePrice ( edtValProd.getText ( ).toString ( ) );
 				p.setIdProd ( edtNumberPro.getText ( ).toString ( ) );
 				p.setIdInterno ( idIntenoProduto );
-				
+				//captura resposta
 				String strProm = spnIsPrmotion.getSelectedItem ( ).toString ( );
-				
-				boolean bolProm = false;
-				bolProm = strProm.equals ( "Sim" );
-				p.setPromotion ( bolProm );
+
+				boolean boolPromo = false;
+				// se sim retor true
+				boolPromo = strProm.equals ( "Sim" );
+				p.setPromotion ( boolPromo );
 				
 				String strType = spnType.getSelectedItem ( ).toString ( );
 				p.setType ( strType );
