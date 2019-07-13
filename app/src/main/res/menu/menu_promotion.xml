@@ -1,0 +1,52 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.rangelti.lamp.ActPromotion">
+
+    <item
+        android:id="@+id/menu_home"
+        android:title="@string/menu_home" />
+    <item
+        android:id="@+id/menu_pedidos_confirm"
+        android:orderInCategory="100"
+        android:title="@string/menu_pedidos_confirm"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_pedidos"
+        android:orderInCategory="100"
+        android:title="@string/menu_pedidos"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_produtos"
+        android:orderInCategory="100"
+        android:title="@string/menu_produtos"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_usuarios"
+        android:orderInCategory="100"
+        android:title="@string/menu_usuarios"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_cadastrar_prod"
+        android:orderInCategory="100"
+        android:title="@string/menu_cadastrar_prod"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_cadastrar_user"
+        android:orderInCategory="100"
+        android:title="@string/menu_cadastrar_user"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_info"
+        android:orderInCategory="100"
+        android:title="@string/menu_info"
+        android:visible="true"
+        app:showAsAction="never" />
+</menu>

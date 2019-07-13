@@ -1,10 +1,15 @@
 package com.comeze.rangelti.hashisushiadmin.views;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -48,7 +53,7 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
         {
             //-----------------
             startVibrate(90);
-            Intent it = new Intent(this, ActPedidos.class);
+            Intent it = new Intent(this, ActPedidosConfirm.class);
             startActivity(it);
 
         } else if (v.getId() == R.id.btnProdotos)
@@ -67,5 +72,75 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
         Vibrator atvib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         atvib.vibrate(time);
     }
+
+    //==> MENUS
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_promotion, menu);
+        return true;
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_produtos)
+        {
+            Intent it = new Intent(this, ActPedidosConfirm.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+
+        if (id == R.id.menu_usuarios)
+        {
+            Intent it = new Intent(this, ActUsuarios.class);
+            startActivity(it);
+
+            finish();
+            return true;
+        }
+
+        if (id == R.id.menu_cadastrar_prod)
+        {
+            Intent it = new Intent(this, ActRegProd.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+
+        if (id == R.id.menu_cadastrar_user)
+        {
+            finish();
+            return true;
+        }
+        if (id == R.id.menu_pedidos)
+        {
+            finish();
+            return true;
+        }
+        if (id == R.id.menu_pedidos_confirm)
+        {
+            Intent it = new Intent(this, ActPedidosConfirm.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+        if (id == R.id.menu_home)
+        {
+            Intent it = new Intent(this, ActHome.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
 }

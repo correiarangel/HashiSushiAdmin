@@ -96,7 +96,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_h">HOME</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
@@ -139,5 +139,13 @@
     <string name="txt_quant_item">Qt:</string>
     <string name="txt_qt">0</string>
     <string name="txt_total_order">R$:</string>
+    <string name="menu_home">HOME</string>
+    <string name="menu_pedidos">PEDIDOS</string>
+    <string name="menu_pedidos_confirm">PEDIDOS CONFIRMADOS</string>
+    <string name="menu_produtos">PRODUTOS</string>
+    <string name="menu_usuarios">USUARIOS</string>
+    <string name="menu_cadastrar_prod">CADATRAR PRODUTO</string>
+    <string name="menu_cadastrar_user">CADASTRAR USUARIO</string>
+    <string name="menu_info">INFO</string>
     //key face login
 </resources>

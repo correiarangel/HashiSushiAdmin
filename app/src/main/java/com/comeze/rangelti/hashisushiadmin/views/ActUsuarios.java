@@ -6,12 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -23,9 +23,9 @@ import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterProduct;
+import com.comeze.rangelti.hashisushiadmin.adapter.AdapterUsers;
 import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
-import com.comeze.rangelti.hashisushiadmin.menu.MyMenu;
 import com.comeze.rangelti.hashisushiadmin.model.Product;
 import com.comeze.rangelti.hashisushiadmin.model.User;
 import com.google.firebase.FirebaseApp;
@@ -42,26 +42,22 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class ActProdutos extends AppCompatActivity {
-
+public class ActUsuarios extends AppCompatActivity {
     private TextView txtProdutos;
 
     private DatabaseReference reference;
-    private List<Product> productsList = new ArrayList<Product>();
-    private RecyclerView list_produsts;
-    private AdapterProduct adapterProduct;
-    private AlertDialog dialog;
+    private List<User> users = new ArrayList<User>();
+    private RecyclerView list_Users;
+    private AdapterUsers adapterUser;
     private String retornIdUser;
     private User user;
     private FirebaseAuth auth;
-    private Product product;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_produtos);
-
+        setContentView(R.layout.act_usuarios);
         ActionBar bar = getSupportActionBar();
         bar.setTitle("");
 
@@ -74,36 +70,35 @@ public class ActProdutos extends AppCompatActivity {
 
 
         this.auth = FirebaseAuth.getInstance();
-        retornaProdutos();
-
+        retornaUsers();
     }
-
 
     private void recycleOnclick()
     {
         //Adiciona evento de clique no recyclerview
-        list_produsts.addOnItemTouchListener(
+        list_Users.addOnItemTouchListener(
 
                 new RecyclerItemClickListener(
                         this,
-                        list_produsts,
+                        list_Users,
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                Product produtoSelecionado = productsList.get(position);
 
-                                String idProduto = produtoSelecionado.getIdProd();
+                                User userSelecionado = users.get(position);
 
-                                System.setProperty("ID_PRODUTO",idProduto );
-                                startEditProd(produtoSelecionado);
+                                String idUser = userSelecionado.getIdUser();
+
+                                System.setProperty("ID_PRODUTO",idUser );
+                                startEditUser(userSelecionado);
                             }
 
                             @Override
                             public void onLongItemClick(View view, int position) {
 
-                                Product produtoSelecionado = productsList.get(position);
+                                User userSelecionado = users.get(position);
 
-                                confirmExclusao(produtoSelecionado);
+                                confirmExclusao(userSelecionado);
 
                                 // msgShort("Produto :"+produtoSelecionado);
                             }
@@ -122,24 +117,20 @@ public class ActProdutos extends AppCompatActivity {
     private void recyclerViewConfig()
     {
 
-        list_produsts.setLayoutManager(new LinearLayoutManager(this));
-        list_produsts.setHasFixedSize(true);
-        adapterProduct = new AdapterProduct(productsList, this);
-        list_produsts.setAdapter(adapterProduct);
+        list_Users.setLayoutManager(new LinearLayoutManager(this));
+        list_Users.setHasFixedSize(true);
+        adapterUser = new AdapterUsers(users, this);
+        list_Users.setAdapter(adapterUser);
     }
 
     private void startComponet()
     {
         txtProdutos = findViewById(R.id.txtProdutos);
         //RecyclerView---
-        list_produsts = findViewById(R.id.list_Orders);
+        list_Users = findViewById(R.id.list_Users);
     }
 
-    @Override
-    protected void attachBaseContext(Context newBase)
-    {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+
 
     //Metudo que ativa vibração
     public void startVibrate(long time)
@@ -151,28 +142,27 @@ public class ActProdutos extends AppCompatActivity {
 
     public void initDB()
     {
-        FirebaseApp.initializeApp(ActProdutos.this);
+        FirebaseApp.initializeApp(ActUsuarios.this);
         this.reference = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void retornaProdutos()
+    public void  retornaUsers()
     {
-        //retorna produto
-        DatabaseReference productDB = reference.child("product");
+        DatabaseReference userDB = reference.child("users");
         //retorna tipo setado
 
         //cria um ouvinte
-        productDB.addValueEventListener(new ValueEventListener()
+        userDB.addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren())
                 {
-                    Product p = objSnapshot.getValue(Product.class);
-                    productsList.add(p);
+                    User u = objSnapshot.getValue(User.class);
+                    users.add(u);
                 }
-                adapterProduct.notifyDataSetChanged();
+                adapterUser.notifyDataSetChanged();
             }
 
             @Override
@@ -188,11 +178,11 @@ public class ActProdutos extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void pesquisarProduto(String pesquisa){
+    private void pesquisarUsuario(String pesquisa){
 
-        DatabaseReference empresasRef = reference
-                .child("product");
-        Query query = empresasRef.orderByChild("description")
+        DatabaseReference userRef = reference
+                .child("users");
+        Query query = userRef.orderByChild("name")
                 .startAt(pesquisa)
                 .endAt(pesquisa + "\uf8ff" );
 
@@ -200,13 +190,13 @@ public class ActProdutos extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                productsList.clear();
+                users.clear();
 
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
-                    productsList.add( ds.getValue(Product.class) );
+                    users.add( ds.getValue(User.class) );
                 }
 
-                adapterProduct.notifyDataSetChanged();
+                adapterUser.notifyDataSetChanged();
 
             }
 
@@ -216,27 +206,26 @@ public class ActProdutos extends AppCompatActivity {
             }
         });
     }
-    private void startEditProd(Product product){
-        Intent it = new Intent(this, ActRegProd.class);
-        it.putExtra("PRODUTO_ENV", product);
-        startActivity(it);
+    private void startEditUser( User user ){
+        //Intent it = new Intent(this, ActCadastraUser.class);
+        //it.putExtra("USER_ENV", user);
+        //startActivity(it);
     }
 
     //comfirmar item com dialog
-    private void confirmExclusao(final Product product )
+    private void confirmExclusao(final User user )
     {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Excluir Produto"+product.getName());
+        alert.setTitle("Excluir Usuario"+user.getName());
         alert.setMessage("Confirma exclusão ? ");
-
 
         alert.setPositiveButton("Confirmar", new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                product.remover(product.getIdInterno());
+                //user.remover(user.getIdUser());
                 msgShort("Excluido !");
 
             }
@@ -253,6 +242,7 @@ public class ActProdutos extends AppCompatActivity {
         AlertDialog dialog = alert.create();
         dialog.show();
     }
+
 
     //==> MENUS
     @Override
@@ -318,6 +308,7 @@ public class ActProdutos extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 
 }

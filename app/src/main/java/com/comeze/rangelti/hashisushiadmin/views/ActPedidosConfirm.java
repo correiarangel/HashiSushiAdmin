@@ -1,5 +1,6 @@
 package com.comeze.rangelti.hashisushiadmin.views;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -14,15 +15,19 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -53,7 +58,7 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class ActPedidos extends AppCompatActivity implements View.OnClickListener {
+public class ActPedidosConfirm extends AppCompatActivity implements View.OnClickListener {
 
     private TextView txtPedidos;
     private TextView txtStatus;
@@ -77,7 +82,7 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_pedidos);
+        setContentView(R.layout.act_pedidos_confirm);
 
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
@@ -230,7 +235,7 @@ public class ActPedidos extends AppCompatActivity implements View.OnClickListene
 
     public void initDB()
     {
-        FirebaseApp.initializeApp(ActPedidos.this);
+        FirebaseApp.initializeApp(ActPedidosConfirm.this);
         this.reference = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -355,5 +360,72 @@ private void startItem(){
             System.out.println("Erro ao gerar toque notificação : "+e);
         }
     }
+
+    //==> MENUS
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_promotion, menu);
+        return true;
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_produtos)
+        {
+            Intent it = new Intent(this, ActPedidosConfirm.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+
+        if (id == R.id.menu_usuarios)
+        {
+            finish();
+            return true;
+        }
+
+        if (id == R.id.menu_cadastrar_prod)
+        {
+            Intent it = new Intent(this, ActRegProd.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+
+        if (id == R.id.menu_cadastrar_user)
+        {
+            finish();
+            return true;
+        }
+        if (id == R.id.menu_pedidos)
+        {
+            finish();
+            return true;
+        }
+        if (id == R.id.menu_pedidos_confirm)
+        {
+            Intent it = new Intent(this, ActPedidosConfirm.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+        if (id == R.id.menu_home)
+        {
+            Intent it = new Intent(this, ActHome.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
 }

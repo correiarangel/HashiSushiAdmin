@@ -205,6 +205,7 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 			startVibrate ( 90 );
 			Intent it = new Intent ( this, ActHome.class );
 			startActivity ( it );
+			finish();
 		}
 		if ( v.getId ( ) == R.id.flotBntNewReg ) {
 			
