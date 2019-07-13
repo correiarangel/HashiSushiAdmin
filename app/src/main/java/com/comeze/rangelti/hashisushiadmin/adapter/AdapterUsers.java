@@ -37,22 +37,24 @@ public class AdapterUsers extends
 
         User user = users.get(i);
 
-        holder.idUser.setText("Cod.:"+user.getIdUser());
-        holder.name.setText("Nome :"+user.getName());
-        holder.address.setText("End :"+user.getAddress());
-        holder.numberHome.setText("Nº :"+ user.getNumberHome());
-        holder.neigthborhood.setText("Bairro :"+ user.getNeigthborhood());
-        holder.cep.setText("CEP :"+ user.getCep());
-        holder.city.setText("Cidade :"+ user.getCity());
-        holder.state.setText("Estado :"+ user.getState());
-        holder.phone.setText("Fone :"+ user.getPhone());
-        holder.email.setText("E-mail :"+ user.getEmail());
-        holder.bornDate.setText("Data Nasc. :"+ user.getBornDate());
-        holder.cpf.setText("CPF :"+ user.getCpf());
-        holder.isAdmin.setText("Administardor :"+ user.getIsAdmin());
-        holder.ponts.setText("Pontos :"+ user.getPonts());
-        holder.password.setText("Senha :"+ user.getPassword());
-        holder.referencePoint.setText("Ponto de referencia :"+ user.getReferencePoint());
+
+
+        holder.idUser.setText( String.format ( "Cód.: %s", user.getIdUser ( ) ) );
+        holder.name.setText( String.format ( "Cliente: %s", user.getName ( ) ) );
+        holder.address.setText( String.format ( "Rua: %s", user.getAddress ( ) ) );
+        holder.numberHome.setText( String.format ( "Nº:%s", user.getNumberHome ( ) ) );
+        holder.neigthborhood.setText( String.format ( "Bairro: %s", user.getNeigthborhood ( ) ) );
+        holder.cep.setText( String.format ( "CEP: %s", user.getCep ( ) ) );
+        holder.city.setText( String.format ( "Cidade: %s", user.getCity ( ) ) );
+        holder.state.setText( String.format ( "Estado: %s", user.getState ( ) ) );
+        holder.phone.setText( String.format ( "Fone: %s", user.getPhone ( ) ) );
+        holder.email.setText( String.format ( "E-mail: %s", user.getEmail ( ) ) );
+        holder.bornDate.setText( String.format ( "Nascimento: %s", user.getBornDate ( ) ) );
+        holder.cpf.setText( String.format ( "CPF: %s", user.getCpf ( ) ) );
+        holder.isAdmin.setText( String.format ( "Administardor: %s", user.getIsAdmin ( ) ) );
+        holder.ponts.setText( String.format ( "Pontos: %d", user.getPonts ( ) ) );
+        holder.password.setText( String.format ( "Senha: %s", user.getPassword ( ) ) );
+
     }
 
     @Override
