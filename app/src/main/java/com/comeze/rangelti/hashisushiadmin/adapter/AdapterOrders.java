@@ -11,14 +11,12 @@ import android.widget.TextView;
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.model.Orders;
 
-
 import java.util.List;
 
 public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHolder> {
 
     private List<Orders> ordersList;
     private Context context;
-
 
     public AdapterOrders(List<Orders> ordersList, Context context) {
         this.ordersList = ordersList;
@@ -32,37 +30,38 @@ public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHol
                 inflate(R.layout.pedidos_adp_list, parent, false);
         return new MyViewHolder(itemLista);
     }
-
-
+    
     @Override
     public void onBindViewHolder(@NonNull  MyViewHolder holder, int i) {
 
         Orders orders = ordersList.get(i);
 
-        holder.idOrders.setText("Cod Pedido :" + orders.getIdOrders());
-        holder.idUser.setText("Cod Cliente :" + orders.getIdUser());
-        holder.name.setText("Nome :" + orders.getName());
-        holder.address.setText("End:" + orders.getAddress());
-        holder.numberHome.setText("Numero :" + orders.getNumberHome());
-        holder.neigthborhood.setText("Bairro :" + orders.getNeigthborhood());
-        holder.cellphone.setText("Fone :" + orders.getCellphone());
-        holder.dateOrder.setText("Data :" + orders.getDateOrder());
-        holder.hour.setText("Hora :" + orders.getHour());
-        holder.qrCode.setText("QrCode :" + orders.getQrCode());
-        holder.quantProd.setText("Qt itens :" + orders.getQuantProd());
-        holder.discont.setText("Desconto :" + orders.getDiscont());
-        holder.status.setText("Status :" + orders.getStatus());
-        holder.totalPrince.setText("Total do Pedido:" + orders.getTotalPrince());
-
-
+        holder.idOrders.setText( String.format ( "Cód pedido: %s", orders.getIdOrders ( ) ) );
+        holder.idUser.setText( String.format ( "Cód cliente: %s", orders.getIdUser ( ) ) );
+        holder.name.setText( String.format ( "Cliente: %s", orders.getName ( ) ) );
+        holder.address.setText( String.format ( "Rua: %s", orders.getAddress ( ) ) );
+        holder.numberHome.setText( String.format ( "Nº:%s", orders.getNumberHome ( ) ) );
+        holder.neigthborhood.setText( String.format ( "Bairro:%s", orders.getNeigthborhood ( ) ) );
+        holder.cellphone.setText( String.format ( "Fone: %s", orders.getCellphone ( ) ) );
+        holder.dateOrder.setText( String.format ( "Data: %s", orders.getDateOrder ( ) ) );
+        holder.hour.setText( String.format ( "Hora: %s", orders.getHour ( ) ) );
+        holder.qrCode.setText( String.format ( "QrCode:%s", orders.getQrCode ( ) ) );
+        holder.quantProd.setText( String.format ( "Itens: %d", orders.getQuantProd ( ) ) );
+        holder.discont.setText( String.format ( "Desconto:%d", orders.getDiscont ( ) ) );
+        holder.status.setText( String.format ( "Status: %s", orders.getStatus ( ) ) );
+        holder.totalPrince.setText( String.format ( "Total do Pedido: %s", orders.getTotalPrince ( ) ) );
     }
-
-
-
-
+    
     @Override
     public int getItemCount() {
         return ordersList.size();
+    }
+
+    public void updateListOrdes(int position){
+
+        this.ordersList.remove(position);
+        notifyDataSetChanged();
+
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -104,13 +103,6 @@ public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHol
             status = itemView.findViewById(R.id.txtStatus);
 
         }
-    }
-
-    public void updateListOrdes(int position){
-
-        this.ordersList.remove(position);
-        notifyDataSetChanged();
-
     }
 
 }
