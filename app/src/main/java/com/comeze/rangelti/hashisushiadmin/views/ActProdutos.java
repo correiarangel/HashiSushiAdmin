@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,14 +21,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterProduct;
 import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
-import com.comeze.rangelti.hashisushiadmin.menu.MyMenu;
 import com.comeze.rangelti.hashisushiadmin.model.Product;
 import com.comeze.rangelti.hashisushiadmin.model.User;
 import com.google.firebase.FirebaseApp;
@@ -46,7 +46,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ActProdutos extends AppCompatActivity {
 
-    private TextView txtProdutos;
+    private FloatingActionButton floatBtnPesquisa;
+    private EditText edtPesquisa;
 
     private DatabaseReference reference;
     private List<Product> productsList = new ArrayList<Product>();
@@ -65,8 +66,10 @@ public class ActProdutos extends AppCompatActivity {
         setContentView(R.layout.act_produtos);
 
         ActionBar bar = getSupportActionBar();
+        bar.hide();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
         bar.setTitle("Produtos");
+
 
         startComponet();
         initDB();
@@ -133,9 +136,26 @@ public class ActProdutos extends AppCompatActivity {
 
     private void startComponet()
     {
-        txtProdutos = findViewById(R.id.txtProdutos);
         //RecyclerView---
         list_produsts = findViewById(R.id.list_Orders);
+        edtPesquisa = findViewById(R.id.edtPesquisar);
+        floatBtnPesquisa = findViewById(R.id.floatBtnPesquisar);
+
+        floatBtnPesquisa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startVibrate(90);
+                String textPesquisa = edtPesquisa.getText().toString();
+
+                if( textPesquisa.equals("")){
+                    msgShort("Digite nome de produto para pesquisa !");
+                    retornaProdutos();
+                }else {
+                    pesquisarProduto(textPesquisa);
+                }
+            }
+        });
     }
 
     @Override
@@ -193,9 +213,9 @@ public class ActProdutos extends AppCompatActivity {
 
     private void pesquisarProduto(String pesquisa){
 
-        DatabaseReference empresasRef = reference
+        DatabaseReference produtosRef = reference
                 .child("product");
-        Query query = empresasRef.orderByChild("description")
+        Query query = produtosRef.orderByChild("description")
                 .startAt(pesquisa)
                 .endAt(pesquisa + "\uf8ff" );
 
@@ -262,6 +282,7 @@ public class ActProdutos extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_promotion, menu);
+
         return true;
     }
 
@@ -308,8 +329,6 @@ public class ActProdutos extends AppCompatActivity {
         }
         if (id == R.id.menu_home)
         {
-            Intent it = new Intent(this, ActHome.class);
-            startActivity(it);
             finish();
             return true;
         }

@@ -7,25 +7,6 @@
     android:background="@color/colorSmoky"
     tools:context=".views.ActProdutos">
 
-    <TextView
-        android:id="@+id/txtProdutos"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
-        android:text="@string/btn_produto"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_light"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline15"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="NotSibling,ObsoleteLayoutParam" />
-
 
 
     <android.support.v7.widget.RecyclerView
@@ -47,7 +28,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.07" />
+        app:layout_constraintGuide_percent="0.10259918" />
+
+    <EditText
+        android:id="@+id/edtPesquisar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="2dp"
+        android:ems="10"
+        android:hint="@string/edit_pesquisa"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorHintText"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
+        app:layout_constraintEnd_toStartOf="@+id/floatBtnPesquisar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatBtnPesquisar"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="2dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.133"
+        app:srcCompat="@drawable/ic_search_white_24dp" />
 
 
 </android.support.constraint.ConstraintLayout>

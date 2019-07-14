@@ -155,7 +155,8 @@ public class ActPedidosConfirm extends AppCompatActivity implements View.OnClick
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Status do pedido : "+pedidoSelecionado.getStatus());
-        alert.setMessage("\nConfirme statatus do pedido. ");
+        alert.setMessage("\nConfirme novo status. ");
+
 
         final EditText edtStatus = new EditText(this);
         edtStatus.setText("em preparo");
@@ -168,11 +169,11 @@ public class ActPedidosConfirm extends AppCompatActivity implements View.OnClick
             public void onClick(DialogInterface dialog, int which) {
 
 
-                String status = edtStatus.getText().toString();
-                orders = new Orders();
-                orders.editStatus(status,pedidoSelecionado.getIdOrders());
-                // listesnerEventPedidos();
+                 String status = edtStatus.getText().toString();
 
+                orders = new Orders();
+                orders.editStatus( status,pedidoSelecionado.getIdOrders());
+                //remove item lista adpter
                 adapterOrders.updateListOrdes(position);
 
             }
@@ -411,8 +412,6 @@ private void startItem(){
         }
         if (id == R.id.menu_home)
         {
-            Intent it = new Intent(this, ActHome.class);
-            startActivity(it);
             finish();
             return true;
         }

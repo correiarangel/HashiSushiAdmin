@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +47,7 @@ import java.util.List;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ActUsuarios extends AppCompatActivity {
-    private TextView txtProdutos;
+
 
     private DatabaseReference reference;
     private List<User> users = new ArrayList<User>();
@@ -54,6 +56,8 @@ public class ActUsuarios extends AppCompatActivity {
     private String retornIdUser;
     private User user;
     private FirebaseAuth auth;
+    private FloatingActionButton floatBtnPesquisa;
+    private EditText edtPesquisa;
 
 
     @Override
@@ -129,9 +133,25 @@ public class ActUsuarios extends AppCompatActivity {
 
     private void startComponet()
     {
-        txtProdutos = findViewById(R.id.txtProdutos);
+
         //RecyclerView---
         list_Users = findViewById(R.id.list_Users);
+        edtPesquisa = findViewById(R.id.edtPesquisaUser);
+        floatBtnPesquisa = findViewById(R.id.floatBtnPesquisaUser);
+
+        floatBtnPesquisa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startVibrate(90);
+                String textPesquisa = edtPesquisa.getText().toString();
+                if( textPesquisa.equals("")){
+                    msgShort("Digite nome de usuario para pesquisa !");
+                    retornaUsers();
+                }else {
+                    pesquisarUsuario(textPesquisa);
+                }
+            }
+        });
     }
 
 
@@ -299,8 +319,6 @@ public class ActUsuarios extends AppCompatActivity {
         }
         if (id == R.id.menu_home)
         {
-            Intent it = new Intent(this, ActHome.class);
-            startActivity(it);
             finish();
             return true;
         }
