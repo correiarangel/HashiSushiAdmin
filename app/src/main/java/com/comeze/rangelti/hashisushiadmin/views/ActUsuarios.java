@@ -22,15 +22,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
-import com.comeze.rangelti.hashisushiadmin.adapter.AdapterProduct;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterUsers;
 import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
-import com.comeze.rangelti.hashisushiadmin.model.Product;
 import com.comeze.rangelti.hashisushiadmin.model.User;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,6 +76,12 @@ public class ActUsuarios extends AppCompatActivity {
 
         this.auth = FirebaseAuth.getInstance();
         retornaUsers();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     private void recycleOnclick()
@@ -308,6 +311,16 @@ public class ActUsuarios extends AppCompatActivity {
 
         if (id == R.id.menu_pedidos)
         {
+            Intent it = new Intent(this, ActPedidos.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+        if (id == R.id.menu_ped_andamento)
+        {
+            Intent it = new Intent(this, ActPedPreparo.class);
+            startActivity(it);
+            finish();
             return true;
         }
         if (id == R.id.menu_pedidos_confirm)

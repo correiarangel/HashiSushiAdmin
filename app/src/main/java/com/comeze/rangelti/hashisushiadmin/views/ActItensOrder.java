@@ -1,6 +1,7 @@
 package com.comeze.rangelti.hashisushiadmin.views;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -31,6 +32,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ActItensOrder extends AppCompatActivity {
 
@@ -63,6 +66,12 @@ public class ActItensOrder extends AppCompatActivity {
         String idOrder =  System.getProperty("ID_ORDER");
         initSearch(idOrder);
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     public void initDB()

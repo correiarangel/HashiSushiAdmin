@@ -1,7 +1,9 @@
 package com.comeze.rangelti.hashisushiadmin.views;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,13 +20,27 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
+import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
+import com.comeze.rangelti.hashisushiadmin.model.User;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ActHome extends AppCompatActivity implements View.OnClickListener {
 
-
+    private DatabaseReference reference;
     private Button btnCadProd;
     private Button btnPedidos;
     private Button btnProdutos;
+    private String retornIdUser;
+    private boolean typeUser;
+    private User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +52,16 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
         bar.setTitle("Hashi Sushi Admin");
 
         initComponet();
+        initDB();
+        retornIdUser = UserFirebase.getIdUser();
+        recoveryDataUser();
+
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     private void initComponet()
@@ -120,8 +146,18 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
         }
         if (id == R.id.menu_pedidos)
         {
+            Intent it = new Intent(this, ActPedidos.class);
+            startActivity(it);
+            finish();
             return true;
         }
+        if (id == R.id.menu_ped_andamento)
+        {
+            Intent it = new Intent(this, ActPedPreparo.class);
+            startActivity(it);
+            return true;
+        }
+
         if (id == R.id.menu_pedidos_confirm)
         {
             Intent it = new Intent(this, ActPedidosConfirm.class);
@@ -142,6 +178,65 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
     private void msgShort(String msg)
     {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void initDB()
+    {
+        FirebaseApp.initializeApp(ActHome.this);
+        this.reference = FirebaseDatabase.getInstance().getReference();
+    }
+
+    //recupera dados do usuario esta com
+    private void recoveryDataUser()
+    {
+
+        DatabaseReference usuariosDB = reference.child("users").child(retornIdUser);
+
+        usuariosDB.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                if (dataSnapshot.getValue() != null)
+                {
+                    user = dataSnapshot.getValue(User.class);
+                }
+
+                typeUser = user.getIsAdmin();
+
+                if(typeUser = false){
+                    msgNoAdmin();
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+    }
+
+
+    //comfirmar item com dialog
+    private void msgNoAdmin()
+    {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Hashi Shushi Admin");
+        alert.setMessage("\nVocẽ não tem pemissão para usar o App," +
+                "contate administração para mais informações");
+
+
+        alert.setPositiveButton("Entendi", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                msgShort("O aplicativo foi finalizado por falta de autorização de uso !");
+                finish();
+            }
+        });
+
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 
 }

@@ -158,5 +158,7 @@
     <string name="txt_is_adm">É administrador:</string>
     <string name="edit_pesquisa">Digite o Produto</string>
     <string name="edt_pesq_user">Digite o nome do Usuario</string>
+    <string name="menu_p_andamento">PEDIDOS EM PREPARO</string>
+    <string name="edt_pesq_data">Digite a data ex.09/07/2019</string>
 
 </resources>

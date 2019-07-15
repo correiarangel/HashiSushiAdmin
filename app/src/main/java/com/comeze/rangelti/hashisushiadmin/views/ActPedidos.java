@@ -8,13 +8,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -25,13 +25,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
+import com.comeze.rangelti.hashisushiadmin.adapter.AdapterOrders;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterProduct;
-import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
+import com.comeze.rangelti.hashisushiadmin.model.OrderItens;
+import com.comeze.rangelti.hashisushiadmin.model.Orders;
 import com.comeze.rangelti.hashisushiadmin.model.Product;
-import com.comeze.rangelti.hashisushiadmin.model.User;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,77 +44,55 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class ActProdutos extends AppCompatActivity {
+public class ActPedidos extends AppCompatActivity {
 
-    private FloatingActionButton floatBtnPesquisa;
-    private EditText edtPesquisa;
+    private FloatingActionButton floatBtnPesqPed;
+    private EditText edtPesqPed;
 
     private DatabaseReference reference;
-    private List<Product> productsList = new ArrayList<Product>();
-    private RecyclerView list_produsts;
-    private AdapterProduct adapterProduct;
-   // private AlertDialog dialog;
-   // private String retornIdUser;
-   // private User user;
-   // private FirebaseAuth auth;
-   // private Product product;
-
+    private List<Orders> ordersList = new ArrayList<Orders>();
+    private RecyclerView recycre_Orders;
+    private AdapterOrders adapterOrders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_produtos);
+        setContentView(R.layout.act_pedidos);
+
 
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
-        bar.setTitle("Produtos");
+        bar.setTitle("Pedidos");
 
 
         startComponet();
         initDB();
-       // retornIdUser = UserFirebase.getIdUser();
 
         recyclerViewConfig();
         recycleOnclick();
 
-
-       // this.auth = FirebaseAuth.getInstance();
-        retornaProdutos();
-
-    }
-
-
-    @Override
-    protected void attachBaseContext(Context newBase)
-    {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        retornaPedidos();
     }
 
     private void recycleOnclick()
     {
         //Adiciona evento de clique no recyclerview
-        list_produsts.addOnItemTouchListener(
+        recycre_Orders.addOnItemTouchListener(
 
                 new RecyclerItemClickListener(
                         this,
-                        list_produsts,
+                        recycre_Orders,
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                Product produtoSelecionado = productsList.get(position);
-
-                                String idProduto = produtoSelecionado.getIdProd();
-
-                                System.setProperty("ID_PRODUTO",idProduto );
-                                startEditProd(produtoSelecionado);
+                                Orders pedidoSecionado = ordersList.get(position);
                             }
 
                             @Override
                             public void onLongItemClick(View view, int position) {
 
-                                Product produtoSelecionado = productsList.get(position);
+                                Orders pedidoSecionado = ordersList.get(position);
 
-                                confirmExclusao(produtoSelecionado);
 
                                 // msgShort("Produto :"+produtoSelecionado);
                             }
@@ -133,34 +111,40 @@ public class ActProdutos extends AppCompatActivity {
     private void recyclerViewConfig()
     {
 
-        list_produsts.setLayoutManager(new LinearLayoutManager(this));
-        list_produsts.setHasFixedSize(true);
-        adapterProduct = new AdapterProduct(productsList, this);
-        list_produsts.setAdapter(adapterProduct);
+        recycre_Orders.setLayoutManager(new LinearLayoutManager(this));
+        recycre_Orders.setHasFixedSize(true);
+        adapterOrders = new AdapterOrders( ordersList, this);
+        recycre_Orders.setAdapter(adapterOrders);
     }
 
     private void startComponet()
     {
         //RecyclerView---
-        list_produsts = findViewById(R.id.list_Orders);
-        edtPesquisa = findViewById(R.id.edtPesquisar);
-        floatBtnPesquisa = findViewById(R.id.floatBtnPesquisar);
+        recycre_Orders = findViewById(R.id.recycre_Orders);
+        edtPesqPed = findViewById(R.id.edtPesqPed);
+        floatBtnPesqPed = findViewById(R.id.floatBtnPesqPed);
 
-        floatBtnPesquisa.setOnClickListener(new View.OnClickListener() {
+        floatBtnPesqPed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 startVibrate(90);
-                String textPesquisa = edtPesquisa.getText().toString();
+                String textPesquisa = edtPesqPed.getText().toString();
 
                 if( textPesquisa.equals("")){
-                    msgShort("Digite nome de produto para pesquisa !");
-                    retornaProdutos();
+                    msgShort("Digite uma data para pesquisa !");
+                    retornaPedidos();
                 }else {
-                    pesquisarProduto(textPesquisa);
+                    pesquisarPedido(textPesquisa);
                 }
             }
         });
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     //Metudo que ativa vibração
@@ -173,28 +157,27 @@ public class ActProdutos extends AppCompatActivity {
 
     public void initDB()
     {
-        FirebaseApp.initializeApp(ActProdutos.this);
+        FirebaseApp.initializeApp(ActPedidos.this);
         this.reference = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void retornaProdutos()
+    public void retornaPedidos()
     {
-        //retorna produto
-        DatabaseReference productDB = reference.child("product");
-        //retorna tipo setado
+        //retorna
+        DatabaseReference pedidosDB = reference.child("orders");
 
         //cria um ouvinte
-        productDB.addValueEventListener(new ValueEventListener()
+        pedidosDB.addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren())
                 {
-                    Product p = objSnapshot.getValue(Product.class);
-                    productsList.add(p);
+                    Orders o  = objSnapshot.getValue(Orders.class);
+                    ordersList.add(o);
                 }
-                adapterProduct.notifyDataSetChanged();
+                adapterOrders.notifyDataSetChanged();
             }
 
             @Override
@@ -210,11 +193,11 @@ public class ActProdutos extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void pesquisarProduto(String pesquisa){
+    private void pesquisarPedido(String pesquisa){
 
         DatabaseReference produtosRef = reference
-                .child("product");
-        Query query = produtosRef.orderByChild("description")
+                .child("orders");
+        Query query = produtosRef.orderByChild("dateOrder")
                 .startAt(pesquisa)
                 .endAt(pesquisa + "\uf8ff" );
 
@@ -222,34 +205,29 @@ public class ActProdutos extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                productsList.clear();
+                ordersList.clear();
 
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
-                    productsList.add( ds.getValue(Product.class) );
+                    ordersList.add( ds.getValue(Orders.class) );
                 }
 
-                adapterProduct.notifyDataSetChanged();
+                adapterOrders.notifyDataSetChanged();
 
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                msgShort("Busca cancelada !");
             }
         });
     }
-    private void startEditProd(Product product){
-        Intent it = new Intent(this, ActRegProd.class);
-        it.putExtra("PRODUTO_ENV", product);
-        startActivity(it);
-    }
 
     //comfirmar item com dialog
-    private void confirmExclusao(final Product product )
+    private void confirmExclusao(final Orders  orders )
     {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Excluir Produto"+product.getName());
+        alert.setTitle("Excluir Pedido :"+orders.getIdOrders());
         alert.setMessage("Confirma exclusão ? ");
 
 
@@ -258,7 +236,7 @@ public class ActProdutos extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                product.remover(product.getIdInterno());
+                orders.removerOrder(orders.getIdOrders());
                 msgShort("Excluido !");
 
             }
@@ -323,9 +301,7 @@ public class ActProdutos extends AppCompatActivity {
         }
         if (id == R.id.menu_pedidos)
         {
-            Intent it = new Intent(this, ActPedidos.class);
-            startActivity(it);
-            finish();
+            msgShort("Já estamos em pedidos !");
             return true;
         }
         if (id == R.id.menu_pedidos_confirm)

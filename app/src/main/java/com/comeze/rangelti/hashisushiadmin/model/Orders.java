@@ -77,11 +77,11 @@ public class Orders implements Serializable {
 
     }
 
-    public void removerOrderItens(String id_user) {
+    public void removerOrder(String id_user) {
 
         DatabaseReference firebaseRef = FirebaseConfig.getFirebase();
         DatabaseReference pedidoRef = firebaseRef
-                .child("orders_user")
+                .child("orders")
                 .child(id_user);
         pedidoRef.removeValue();
     }

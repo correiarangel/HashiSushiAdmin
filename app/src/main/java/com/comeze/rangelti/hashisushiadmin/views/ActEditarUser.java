@@ -343,6 +343,9 @@ public class ActEditarUser extends AppCompatActivity  implements View.OnClickLis
         }
         if (id == R.id.menu_pedidos)
         {
+            Intent it = new Intent(this, ActPedidos.class);
+            startActivity(it);
+            finish();
             return true;
         }
         if (id == R.id.menu_pedidos_confirm)

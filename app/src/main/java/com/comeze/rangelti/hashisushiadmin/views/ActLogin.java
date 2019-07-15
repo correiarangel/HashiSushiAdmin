@@ -25,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class ActLogin extends AppCompatActivity implements View.OnClickListener  {
 
     private Button btnEntrar;
@@ -33,10 +35,6 @@ public class ActLogin extends AppCompatActivity implements View.OnClickListener 
     private String senha,email;
     private int cont;
     private char controlBtn;
-    private ConstraintLayout ActLogin;
-    private Switch chkBxRememberPasswd;
-    private String emailUser;
-    //private String retornIdUser;
     private FirebaseAuth userAuth;
     private DatabaseReference reference;
 
@@ -61,12 +59,17 @@ public class ActLogin extends AppCompatActivity implements View.OnClickListener 
         testUserCurrent();
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
     public void startDB()
     {
         FirebaseApp.initializeApp(ActLogin.this);
         this.reference = FirebaseDatabase.getInstance().getReference();
         this.userAuth = FirebaseAuth.getInstance();
-        //retornIdUser = UserFirebase.getIdUser();
     }
 
     @Override
