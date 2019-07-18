@@ -37,8 +37,6 @@ public class AdapterUsers extends
 
         User user = users.get(i);
 
-
-
         holder.idUser.setText( String.format ( "Cód.: %s", user.getIdUser ( ) ) );
         holder.name.setText( String.format ( "Cliente: %s", user.getName ( ) ) );
         holder.address.setText( String.format ( "Rua: %s", user.getAddress ( ) ) );
@@ -46,6 +44,7 @@ public class AdapterUsers extends
         holder.neigthborhood.setText( String.format ( "Bairro: %s", user.getNeigthborhood ( ) ) );
         holder.cep.setText( String.format ( "CEP: %s", user.getCep ( ) ) );
         holder.city.setText( String.format ( "Cidade: %s", user.getCity ( ) ) );
+        holder.referencePoint.setText( String.format ( "Referencia: %s", user.getReferencePoint ( ) ) );
         holder.state.setText( String.format ( "Estado: %s", user.getState ( ) ) );
         holder.phone.setText( String.format ( "Fone: %s", user.getPhone ( ) ) );
         holder.email.setText( String.format ( "E-mail: %s", user.getEmail ( ) ) );
@@ -63,8 +62,6 @@ public class AdapterUsers extends
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-
-
 
         TextView idUser;
         TextView name;
@@ -100,7 +97,7 @@ public class AdapterUsers extends
             password  =  itemView.findViewById(R.id.txtPassword);
             isAdmin  =  itemView.findViewById(R.id.txtIsAdmin);
             ponts  =  itemView.findViewById(R.id.txtPontos);
-            referencePoint  =  itemView.findViewById(R.id.txtPontos);
+            referencePoint  =  itemView.findViewById(R.id.txtPontoReferencia);
             cpf  =  itemView.findViewById(R.id.txtCpf);
         }
     }

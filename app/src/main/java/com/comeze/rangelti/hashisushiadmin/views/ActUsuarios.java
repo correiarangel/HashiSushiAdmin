@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterUsers;
-import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
 import com.comeze.rangelti.hashisushiadmin.model.User;
 import com.google.firebase.FirebaseApp;
@@ -50,8 +49,6 @@ public class ActUsuarios extends AppCompatActivity {
     private List<User> users = new ArrayList<User>();
     private RecyclerView list_Users;
     private AdapterUsers adapterUser;
-    private String retornIdUser;
-    private User user;
     private FirebaseAuth auth;
     private FloatingActionButton floatBtnPesquisa;
     private EditText edtPesquisa;
@@ -68,7 +65,6 @@ public class ActUsuarios extends AppCompatActivity {
 
         startComponet();
         initDB();
-        retornIdUser = UserFirebase.getIdUser();
 
         recyclerViewConfig();
         recycleOnclick();
@@ -271,7 +267,6 @@ public class ActUsuarios extends AppCompatActivity {
         dialog.show();
     }
 
-
     //==> MENUS
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -338,7 +333,4 @@ public class ActUsuarios extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }

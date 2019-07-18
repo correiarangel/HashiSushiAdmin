@@ -51,11 +51,9 @@ public class ActItensOrder extends AppCompatActivity {
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
         bar.setTitle("Itens Pedido");
-        //getSupportActionBar().hide();
 
         //Travæ rotaçãø da tela
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
 
         startComponet();
         initDB();

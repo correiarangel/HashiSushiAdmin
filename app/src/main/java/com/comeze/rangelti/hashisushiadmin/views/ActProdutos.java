@@ -26,12 +26,9 @@ import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterProduct;
-import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
 import com.comeze.rangelti.hashisushiadmin.model.Product;
-import com.comeze.rangelti.hashisushiadmin.model.User;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,12 +50,6 @@ public class ActProdutos extends AppCompatActivity {
     private List<Product> productsList = new ArrayList<Product>();
     private RecyclerView list_produsts;
     private AdapterProduct adapterProduct;
-   // private AlertDialog dialog;
-   // private String retornIdUser;
-   // private User user;
-   // private FirebaseAuth auth;
-   // private Product product;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +63,11 @@ public class ActProdutos extends AppCompatActivity {
 
         startComponet();
         initDB();
-       // retornIdUser = UserFirebase.getIdUser();
 
         recyclerViewConfig();
         recycleOnclick();
 
-
-       // this.auth = FirebaseAuth.getInstance();
         retornaProdutos();
-
     }
 
 
@@ -116,7 +103,6 @@ public class ActProdutos extends AppCompatActivity {
 
                                 confirmExclusao(produtoSelecionado);
 
-                                // msgShort("Produto :"+produtoSelecionado);
                             }
 
                             @Override

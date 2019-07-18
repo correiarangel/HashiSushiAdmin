@@ -2,25 +2,16 @@ package com.comeze.rangelti.hashisushiadmin.views;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,7 +28,6 @@ import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterOrders;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
 import com.comeze.rangelti.hashisushiadmin.model.Orders;
-import com.comeze.rangelti.hashisushiadmin.model.User;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +35,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +50,6 @@ public class ActPedPreparo extends AppCompatActivity {
 
     private Orders orders;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,11 +58,9 @@ public class ActPedPreparo extends AppCompatActivity {
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
         bar.setTitle("Pedidos em Preparo");
-        //getSupportActionBar().hide();
 
         //Travæ rotaçãø da tela
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
 
         startComponet();
         initDB();
@@ -185,21 +171,9 @@ public class ActPedPreparo extends AppCompatActivity {
 
     private void startComponet()
     {
-
         //RecyclerView---
         recy_Orders = findViewById(R.id.recy_Orders);
-
     }
-
-    //Metudo que ativa vibração
-    public void startVibrate(long time)
-    {
-        // cria um obj atvib que recebe seu valor de context
-        Vibrator atvib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        atvib.vibrate(time);
-    }
-
-
 
     public void initDB()
     {
@@ -246,86 +220,14 @@ public class ActPedPreparo extends AppCompatActivity {
 
     }
 
-    public void retornaPedidos()
-    {
-        //retorna
-        DatabaseReference pedidosDB = reference.child("orders");
-        //retorna o no setado
-        Query querySearch = pedidosDB.orderByChild("status").equalTo("em preparo");
-        //cria um ouvinte
-        querySearch.addValueEventListener(new ValueEventListener()
-        {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-            {
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren())
-                {
-                    Orders orders = objSnapshot.getValue(Orders.class);
-                    ordersList.add(orders);
-
-                }
-                adapterOrders.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError)
-            {
-                msgShort("Houve algum erro no retorno de pedidos :" + databaseError);
-            }
-        });
-    }
-
-
-
     private void msgShort(String msg)
     {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-
-
-
-
     private void startItem(){
         Intent it = new Intent(this, ActItensOrder.class);
         startActivity(it);
-    }
-
-    private void notificacao( ){
-
-
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        PendingIntent p = PendingIntent.getActivity(this,0, new Intent(),0 );
-        // PendingIntent p = PendingIntent.getActivity(this,0, new Intent(this,ActLivroRenovar.class),0 );
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setTicker("Status Pedido");
-        builder.setContentTitle("Pedido em andamento !");
-
-        builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources() ,R.mipmap.ic_launcher));
-        builder.setContentIntent(p);
-
-        NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
-        String[] descs = new String[]{"Novo pedido em andamento !"};
-        for(int i = 0;i < descs.length; i++){
-            style.addLine(descs[i]);
-        }
-        builder.setStyle(style);
-
-        Notification no = builder.build();
-        no.vibrate = new long[]{150,300,150};
-        no.flags = Notification.FLAG_AUTO_CANCEL;
-        nm.notify(R.mipmap.ic_launcher,no);
-
-        try {
-            Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone toque = RingtoneManager.getRingtone(this,som);
-            toque.play();
-        }catch (Exception e){
-
-            System.out.println("Erro ao gerar toque notificação : "+e);
-        }
     }
 
     //==> MENUS

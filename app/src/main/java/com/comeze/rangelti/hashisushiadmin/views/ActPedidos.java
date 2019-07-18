@@ -22,15 +22,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterOrders;
-import com.comeze.rangelti.hashisushiadmin.adapter.AdapterProduct;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
-import com.comeze.rangelti.hashisushiadmin.model.OrderItens;
 import com.comeze.rangelti.hashisushiadmin.model.Orders;
-import com.comeze.rangelti.hashisushiadmin.model.Product;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,11 +47,16 @@ public class ActPedidos extends AppCompatActivity {
 
     private FloatingActionButton floatBtnPesqPed;
     private EditText edtPesqPed;
+    private TextView txtQuanVendas;
+    private TextView txtTotalVendas;
 
     private DatabaseReference reference;
     private List<Orders> ordersList = new ArrayList<Orders>();
     private RecyclerView recycre_Orders;
     private AdapterOrders adapterOrders;
+    private Double totalVenda;
+    private Double totalDevendas;
+    private int quantVendas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +90,8 @@ public class ActPedidos extends AppCompatActivity {
                             @Override
                             public void onItemClick(View view, int position) {
                                 Orders pedidoSecionado = ordersList.get(position);
+
+                                confirmStatus(pedidoSecionado,position);
                             }
 
                             @Override
@@ -93,8 +99,6 @@ public class ActPedidos extends AppCompatActivity {
 
                                 Orders pedidoSecionado = ordersList.get(position);
 
-
-                                // msgShort("Produto :"+produtoSelecionado);
                             }
 
                             @Override
@@ -123,7 +127,9 @@ public class ActPedidos extends AppCompatActivity {
         recycre_Orders = findViewById(R.id.recycre_Orders);
         edtPesqPed = findViewById(R.id.edtPesqPed);
         floatBtnPesqPed = findViewById(R.id.floatBtnPesqPed);
-
+        txtQuanVendas = findViewById(R.id.txtQuantVendas);
+        txtTotalVendas = findViewById(R.id.txtTotalVendas);
+        //executa pesquisa
         floatBtnPesqPed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,6 +169,10 @@ public class ActPedidos extends AppCompatActivity {
 
     public void retornaPedidos()
     {
+        totalDevendas = 0.0;
+        totalVenda = 0.0;
+        quantVendas = 0;
+
         //retorna
         DatabaseReference pedidosDB = reference.child("orders");
 
@@ -176,7 +186,25 @@ public class ActPedidos extends AppCompatActivity {
                 {
                     Orders o  = objSnapshot.getValue(Orders.class);
                     ordersList.add(o);
+
+                    quantVendas = ordersList.size();
+
+                //    totalDevendas = totalVenda * quantVendas;
                 }
+                for(int n = 0; n < ordersList.size(); n++) {
+
+                    if(n == 0) {
+                        totalVenda = ordersList.get(0).getTotalPrince();
+                    }else {
+                        totalVenda = totalVenda + ordersList.get(n).getTotalPrince();
+                    }
+                }
+
+                DecimalFormat df = new DecimalFormat("0.00");
+
+                txtQuanVendas.setText(String.valueOf( quantVendas ) );
+                txtTotalVendas.setText( df.format( totalVenda ) );
+
                 adapterOrders.notifyDataSetChanged();
             }
 
@@ -195,6 +223,10 @@ public class ActPedidos extends AppCompatActivity {
 
     private void pesquisarPedido(String pesquisa){
 
+        totalDevendas = 0.0;
+        totalVenda = 0.0;
+        quantVendas = 0;
+
         DatabaseReference produtosRef = reference
                 .child("orders");
         Query query = produtosRef.orderByChild("dateOrder")
@@ -208,8 +240,31 @@ public class ActPedidos extends AppCompatActivity {
                 ordersList.clear();
 
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
-                    ordersList.add( ds.getValue(Orders.class) );
+
+                    Orders o  = ds.getValue(Orders.class);
+
+                    ordersList.add(o);
+                    quantVendas = ordersList.size();
+                    //totalVenda = o.getTotalPrince();
+
+                    //totalDevendas = totalVenda * quantVendas;
                 }
+
+                for(int n = 0; n < ordersList.size(); n++) {
+
+                    if(n == 0) {
+                        totalVenda = ordersList.get(0).getTotalPrince();
+                    }else {
+                        totalVenda = totalVenda + ordersList.get(n).getTotalPrince();
+                    }
+
+                }
+
+
+                DecimalFormat df = new DecimalFormat("0.00");
+
+                txtQuanVendas.setText(String.valueOf( quantVendas ) );
+                txtTotalVendas.setText( df.format( totalVenda ) );
 
                 adapterOrders.notifyDataSetChanged();
 
@@ -254,6 +309,44 @@ public class ActPedidos extends AppCompatActivity {
         dialog.show();
     }
 
+    //comfirmar item com dialog
+    private void confirmStatus(final Orders pedidoSelecionado , final int position)
+    {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Status do pedido : "+pedidoSelecionado.getStatus());
+        alert.setMessage("\nConfirme novo status. ");
+
+
+        final EditText edtStatus = new EditText(this);
+        edtStatus.setText("entregue");
+        alert.setView(edtStatus);
+
+        alert.setPositiveButton("Confirmar", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+                String status = edtStatus.getText().toString();
+
+                Orders orders = new Orders();
+                orders.editStatus( status,pedidoSelecionado.getIdOrders());
+                //remove item lista adpter
+                adapterOrders.updateListOrdes(position);
+
+            }
+        });
+
+        alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which) { }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
+
     //==> MENUS
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -272,8 +365,9 @@ public class ActPedidos extends AppCompatActivity {
 
         if (id == R.id.menu_produtos)
         {
-
-            msgShort("Já estamos em Produtos");
+            Intent it = new Intent(this, ActProdutos.class);
+            startActivity(it);
+            finish();
             return true;
         }
 
@@ -319,6 +413,4 @@ public class ActPedidos extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }

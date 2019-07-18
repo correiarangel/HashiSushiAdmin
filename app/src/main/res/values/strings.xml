@@ -3,7 +3,7 @@
     <string name="txt_user">E-mail:</string>
     <string name="txt_password">Senha:</string>
     <string name="btn_login">ENTRAR</string>
-    <string name="btn_pedidos">PEDIDOS</string>
+    <string name="btn_pedidos">PEDIDOS CONFIRMADOS</string>
     <string name="btn_produto">PRODUTOS</string>
     <string name="btn_cad_prod">CASDASTRO DE PRODUTO</string>
     <string name="btn_cad_prod_edit">EDITAR PRODUTO</string>
@@ -160,5 +160,7 @@
     <string name="edt_pesq_user">Digite o nome do Usuario</string>
     <string name="menu_p_andamento">PEDIDOS EM PREPARO</string>
     <string name="edt_pesq_data">Digite a data ex.09/07/2019</string>
+    <string name="txt_totaol_vendas">Total de Vendas R$</string>
+    <string name="txt_qt_vendas">Qt.Vendas:</string>
 
 </resources>

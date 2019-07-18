@@ -70,11 +70,11 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
         btnPedidos = findViewById(R.id.btntPedido);
         btnProdutos = findViewById(R.id.btnProdotos);
 
-
         btnPedidos.setOnClickListener(this);
         btnCadProd.setOnClickListener(this);
         btnProdutos.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v)
     {
@@ -205,38 +205,16 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
 
                 typeUser = user.getIsAdmin();
 
-                if(typeUser = false){
-                    msgNoAdmin();
+                if(typeUser != true){
+                    String msg = "Vocẽ não é Admin,o App será finalizado !";
+                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                    finish();
                 }
 
             }
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
-    }
-
-
-    //comfirmar item com dialog
-    private void msgNoAdmin()
-    {
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Hashi Shushi Admin");
-        alert.setMessage("\nVocẽ não tem pemissão para usar o App," +
-                "contate administração para mais informações");
-
-
-        alert.setPositiveButton("Entendi", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                msgShort("O aplicativo foi finalizado por falta de autorização de uso !");
-                finish();
-            }
-        });
-
-        AlertDialog dialog = alert.create();
-        dialog.show();
     }
 
 }

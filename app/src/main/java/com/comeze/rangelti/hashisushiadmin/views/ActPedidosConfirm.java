@@ -80,12 +80,6 @@ public class ActPedidosConfirm extends AppCompatActivity  {
         recyclerViewConfig();
         recycleOnclick();
         listesnerEventPedidos();
-
-       // initSearch();
-       //recoveryDataUser();
-      //  this.auth = FirebaseAuth.getInstance();
-
-
     }
 
     @Override
@@ -195,22 +189,11 @@ public class ActPedidosConfirm extends AppCompatActivity  {
 
     }
 
-    //Metudo que ativa vibração
-    public void startVibrate(long time)
-    {
-        // cria um obj atvib que recebe seu valor de context
-        Vibrator atvib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        atvib.vibrate(time);
-    }
-
-
-
     public void initDB()
     {
         FirebaseApp.initializeApp(ActPedidosConfirm.this);
         this.reference = FirebaseDatabase.getInstance().getReference();
     }
-
 
     public void listesnerEventPedidos(){
 

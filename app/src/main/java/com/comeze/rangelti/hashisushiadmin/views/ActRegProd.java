@@ -60,7 +60,7 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	private DatabaseReference firebaseReference;
 	private String idIntenoProduto;
 	private String urlImagemSelecionada = "";
-	private String ID_PRODUTO_RECEBIDO;
+	//private String ID_PRODUTO_RECEBIDO;
 	private Product product;
 	
 	private Bundle extrasProd;

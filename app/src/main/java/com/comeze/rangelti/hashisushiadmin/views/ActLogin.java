@@ -6,13 +6,11 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -183,7 +181,6 @@ public class ActLogin extends AppCompatActivity implements View.OnClickListener 
             finaliza();
         }
     }
-
 
     private void finaliza()
     {
