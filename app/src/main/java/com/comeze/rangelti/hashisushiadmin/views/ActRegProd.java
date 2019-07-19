@@ -49,7 +49,6 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	private EditText edtValProd;
 	private EditText edtUrl;
 	private ImageView imgVwProduction;
-	private FloatingActionButton flotBntHomeReg;
 	private FloatingActionButton flotBntSaveReg;
 	private FloatingActionButton flotBntNewReg;
 	private FloatingActionButton flotBntExitReg;
@@ -76,8 +75,7 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 		isPromotionSpn ( );
 		typeSpn ( );
 		startDB ( );
-		
-		flotBntHomeReg.setOnClickListener ( this );
+
 		flotBntSaveReg.setOnClickListener ( this );
 		flotBntNewReg.setOnClickListener ( this );
 		flotBntExitReg.setOnClickListener ( this );
@@ -138,8 +136,6 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 		edtUrl = findViewById ( R.id.edtUrl );
 		
 		imgVwProduction = findViewById ( R.id.imgVwProduction );
-		
-		flotBntHomeReg = findViewById ( R.id.flotBntHomeReg );
 		flotBntSaveReg = findViewById ( R.id.flotBntSaveReg );
 		flotBntNewReg = findViewById ( R.id.flotBntNewReg );
 		flotBntExitReg = findViewById ( R.id.flotBntExitReg );
@@ -191,20 +187,11 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	
 	@Override
 	public void onClick ( View v ) {
-		
-		
-		if ( v.getId ( ) == R.id.flotBntHomeReg ) {
-			
-			startVibrate ( 90 );
-			Intent it = new Intent ( this, ActHome.class );
-			startActivity ( it );
-			finish();
-		}
+
 		if ( v.getId ( ) == R.id.flotBntNewReg ) {
 			
 			startVibrate ( 90 );
 			clearFilds ( );
-			
 			
 		}
 		if ( v.getId ( ) == R.id.flotBntSaveReg ) {
