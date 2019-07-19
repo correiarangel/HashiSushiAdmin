@@ -97,7 +97,13 @@ public class ActPedidos extends AppCompatActivity {
                             @Override
                             public void onLongItemClick(View view, int position) {
 
-                                Orders pedidoSecionado = ordersList.get(position);
+                                Orders  pedidoSelecionado = ordersList.get(position);
+
+                                String idOrder =  pedidoSelecionado.getIdOrders();
+                                //envia id order para actItensOrder
+                                System.setProperty("ID_ORDER",idOrder );
+                                //chama actItensOrder
+                                startItem();
 
                             }
 
@@ -110,6 +116,7 @@ public class ActPedidos extends AppCompatActivity {
                 )
         );
     }
+
 
     //Configura recyclerview
     private void recyclerViewConfig()
@@ -186,13 +193,13 @@ public class ActPedidos extends AppCompatActivity {
                 {
                     Orders o  = objSnapshot.getValue(Orders.class);
                     ordersList.add(o);
-
+                    //recupera quant de vendas
                     quantVendas = ordersList.size();
 
-                //    totalDevendas = totalVenda * quantVendas;
                 }
                 for(int n = 0; n < ordersList.size(); n++) {
-
+                    //se list size = 0 mostra  mostra posição 0
+                    //se list size > 0 total recebe total + pedido da posição
                     if(n == 0) {
                         totalVenda = ordersList.get(0).getTotalPrince();
                     }else {
@@ -245,9 +252,6 @@ public class ActPedidos extends AppCompatActivity {
 
                     ordersList.add(o);
                     quantVendas = ordersList.size();
-                    //totalVenda = o.getTotalPrince();
-
-                    //totalDevendas = totalVenda * quantVendas;
                 }
 
                 for(int n = 0; n < ordersList.size(); n++) {
@@ -413,4 +417,11 @@ public class ActPedidos extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    private void startItem(){
+        Intent it = new Intent(this, ActItensOrder.class);
+        startActivity(it);
+    }
+
 }

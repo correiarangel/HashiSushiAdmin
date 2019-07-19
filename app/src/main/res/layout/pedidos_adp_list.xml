@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textColor="@color/colorFace"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
         <TextView
@@ -100,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/txtObservation"

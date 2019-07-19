@@ -59,9 +59,6 @@ public class ActPedPreparo extends AppCompatActivity {
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
         bar.setTitle("Pedidos em Preparo");
 
-        //Travæ rotaçãø da tela
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         startComponet();
         initDB();
 

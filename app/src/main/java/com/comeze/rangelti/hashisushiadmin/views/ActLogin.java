@@ -43,9 +43,6 @@ public class ActLogin extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.act_login);
         getSupportActionBar().hide();
 
-
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);  //Trava a rotaçãø da tela
-
         findViewByIds();
 
         if (!edtEmail.getText().toString().equals(""))

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
@@ -55,7 +53,6 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	private FloatingActionButton flotBntSaveReg;
 	private FloatingActionButton flotBntNewReg;
 	private FloatingActionButton flotBntExitReg;
-	private TextView txtRegisterProd;
 	private StorageReference storageReference;
 	private DatabaseReference firebaseReference;
 	private String idIntenoProduto;
@@ -78,7 +75,6 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 		
 		isPromotionSpn ( );
 		typeSpn ( );
-		fontLogo ( );
 		startDB ( );
 		
 		flotBntHomeReg.setOnClickListener ( this );
@@ -130,13 +126,6 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 		super.attachBaseContext ( CalligraphyContextWrapper.wrap ( newBase ) );
 	}
 	
-	//Altera fonte do txtLogo
-	private void fontLogo ( ) {
-		
-		Typeface font = Typeface.createFromAsset ( getAssets ( ), "RagingRedLotusBB.ttf" );
-		txtRegisterProd.setTypeface ( font );
-	}
-	
 	private void startCompnent ( ) {
 		
 		spnType = findViewById ( R.id.spnType );
@@ -147,8 +136,6 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 		edtNameProd = findViewById ( R.id.edtNameProd );
 		edtValProd = findViewById ( R.id.edtValProd );
 		edtUrl = findViewById ( R.id.edtUrl );
-		
-		txtRegisterProd = findViewById ( R.id.txtRegisterProd );
 		
 		imgVwProduction = findViewById ( R.id.imgVwProduction );
 		

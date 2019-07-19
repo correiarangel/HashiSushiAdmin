@@ -69,9 +69,6 @@ public class ActPedidosConfirm extends AppCompatActivity  {
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
         bar.setTitle("Pedidos Confirmados");
 
-        //Travæ rotaçãø da tela
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         startComponet();
         initDB();
         retornIdUser = UserFirebase.getIdUser();
@@ -243,7 +240,9 @@ public class ActPedidosConfirm extends AppCompatActivity  {
     }
 
     private void msgShort(String msg)
-    {
+    {                   //totalVenda = o.getTotalPrince();
+
+                    //totalDevendas = totalVenda * quantVendas;
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 

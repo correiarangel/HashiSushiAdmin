@@ -160,7 +160,8 @@
     <string name="edt_pesq_user">Digite o nome do Usuario</string>
     <string name="menu_p_andamento">PEDIDOS EM PREPARO</string>
     <string name="edt_pesq_data">Digite a data ex.09/07/2019</string>
-    <string name="txt_totaol_vendas">Total de Vendas R$</string>
-    <string name="txt_qt_vendas">Qt.Vendas:</string>
+    <string name="txt_totaol_vendas">Total Pedidos R$</string>
+    <string name="txt_qt_vendas">Qt.Pedidos:</string>
+    <string name="txt_order_id">Pedido:</string>
 
 </resources>

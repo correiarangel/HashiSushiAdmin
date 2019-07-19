@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
@@ -15,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterItensPedido;
@@ -41,6 +41,8 @@ public class ActItensOrder extends AppCompatActivity {
     private List<OrderItens> itensList = new ArrayList<>();
     private RecyclerView list_Itens_Orders;
     private AdapterItensPedido adapterItensPedido;
+    private TextView txtCodPedido;
+    private TextView txtNomeCliente;
 
 
     @Override
@@ -50,10 +52,7 @@ public class ActItensOrder extends AppCompatActivity {
 
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
-        bar.setTitle("Itens Pedido");
-
-        //Travæ rotaçãø da tela
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        bar.setTitle("Itens do Pedido");
 
         startComponet();
         initDB();
@@ -123,6 +122,9 @@ public class ActItensOrder extends AppCompatActivity {
         //RecyclerView---
         list_Itens_Orders = findViewById(R.id.list_Itens_Orders);
 
+        txtCodPedido = findViewById(R.id.txtCodPedido);
+        txtNomeCliente = findViewById(R.id.txtNomeCliente);
+
     }
 
     public void initSearch(final String idOrder)
@@ -143,13 +145,20 @@ public class ActItensOrder extends AppCompatActivity {
                 {
 
                     Orders orders = objSnapshot.getValue(Orders.class);
+
+                    txtCodPedido.setText( orders.getIdOrders() );
+                    txtNomeCliente.setText( orders.getName() );
+
                     List<OrderItens> list = orders.getOrderItens();
+
                     for (int i = 0;i < list.size();i ++) {
 
                         OrderItens itens = list.get(i);
                         itensList.add(itens);
                     }
+
                 }
+
                 adapterItensPedido.notifyDataSetChanged();
             }
 
