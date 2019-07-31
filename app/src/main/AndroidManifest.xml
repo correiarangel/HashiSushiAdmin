@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.ActPedidos"></activity>
+        <activity android:name=".views.actInfo"></activity>
+        <activity android:name=".views.ActPedidos" />
         <activity android:name=".views.ActPedPreparo" />
         <activity android:name=".views.ActEditarUser" />
         <activity android:name=".views.ActUsuarios" />
