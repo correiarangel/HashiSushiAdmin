@@ -41,6 +41,9 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menu_custo"
+        android:title="@string/menu_cust_entrega" />
+    <item
         android:id="@+id/menu_info"
         android:orderInCategory="100"
         android:title="@string/menu_info"

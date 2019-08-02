@@ -27,7 +27,6 @@ public class Product implements Serializable {
         DatabaseReference produtoRef = firebaseRef
                 .child("product")
                 .push();
-
         //pega retorno de id gerado com push
         String internoId = produtoRef.getKey();
         setIdInterno(internoId);

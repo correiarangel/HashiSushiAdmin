@@ -163,5 +163,6 @@
     <string name="txt_totaol_vendas">Total Pedidos R$</string>
     <string name="txt_qt_vendas">Qt.Pedidos:</string>
     <string name="txt_order_id">Pedido:</string>
+    <string name="menu_cust_entrega">COFIG.CUSTO ENTREGA</string>
 
 </resources>
