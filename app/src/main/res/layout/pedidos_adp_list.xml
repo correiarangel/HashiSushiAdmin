@@ -75,21 +75,7 @@
             android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
         <TextView
-            android:id="@+id/txtQrCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
-
-        <TextView
             android:id="@+id/txtQuatProtod"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
-
-        <TextView
-            android:id="@+id/txtDiscont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
@@ -107,6 +93,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="S/obs"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+
+        <TextView
+            android:id="@+id/txtDeliveryCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/txtDiscont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
             android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
         <TextView

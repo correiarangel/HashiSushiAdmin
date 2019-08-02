@@ -256,8 +256,7 @@ private void startItem(){
 
 
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        PendingIntent p = PendingIntent.getActivity(this,0, new Intent(),0 );
-        // PendingIntent p = PendingIntent.getActivity(this,0, new Intent(this,ActLivroRenovar.class),0 );
+        PendingIntent p = PendingIntent.getActivity(this,0, new Intent(this,ActPedidosConfirm.class),0 );
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setTicker("Pedido Novo");

@@ -21,7 +21,7 @@ public class Orders implements Serializable {
     private String cellphone;
 	private String dateOrder;
     private String hour;
-    private String qrCode;
+    private String deliveryCost;
     private int quantProd;
     private int discont;
     private double totalPrince;
@@ -168,12 +168,12 @@ public class Orders implements Serializable {
         this.hour = hour;
     }
 
-    public String getQrCode() {
-        return qrCode;
+    public String getDeliveryCost() {
+        return deliveryCost;
     }
 
-    public void setQrCode(String qrCode) {
-        this.qrCode = qrCode;
+    public void setDeliveryCost(String deliveryCost) {
+        this.deliveryCost = deliveryCost;
     }
 
     public int getQuantProd() {
@@ -236,7 +236,7 @@ public class Orders implements Serializable {
                 ", cellphone='" + cellphone + '\'' +
                 ", dateOrder=" + dateOrder +
                 ", hour=" + hour +
-                ", qrCode='" + qrCode + '\'' +
+                ", deliveryCost='" + deliveryCost + '\'' +
                 ", quantProd=" + quantProd +
                 ", discont=" + discont +
                 ", totalPrince='" + totalPrince + '\'' +

@@ -45,9 +45,9 @@ public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHol
         holder.cellphone.setText( String.format ( "Fone: %s", orders.getCellphone ( ) ) );
         holder.dateOrder.setText( String.format ( "Data: %s", orders.getDateOrder ( ) ) );
         holder.hour.setText( String.format ( "Hora: %s", orders.getHour ( ) ) );
-        holder.qrCode.setText( String.format ( "QrCode:%s", orders.getQrCode ( ) ) );
         holder.quantProd.setText( String.format ( "Itens: %d", orders.getQuantProd ( ) ) );
         holder.discont.setText( String.format ( "Desconto:%d", orders.getDiscont ( ) ) );
+        holder.deliveryCost.setText( String.format ( "Taxa de entrega: %s", orders.getDeliveryCost ( ) ) );
         holder.status.setText( String.format ( "Status: %s", orders.getStatus ( ) ) );
         holder.totalPrince.setText( String.format ( "Total do Pedido: %s", orders.getTotalPrince ( ) ) );
     }
@@ -75,11 +75,10 @@ public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHol
         TextView cellphone;
         TextView dateOrder;
         TextView hour;
-        TextView qrCode;
         TextView quantProd;
         TextView discont;
         TextView status;
-        TextView txtordersItens;
+        TextView deliveryCost;
         TextView totalPrince;
         TextView observation;
 
@@ -95,12 +94,12 @@ public class AdapterOrders  extends RecyclerView.Adapter<AdapterOrders.MyViewHol
             cellphone = itemView.findViewById(R.id.txtCellPhone);
             dateOrder = itemView.findViewById(R.id.txtDateOrder);
             hour = itemView.findViewById(R.id.txtHour);
-            qrCode = itemView.findViewById(R.id.txtQrCode);
             quantProd = itemView.findViewById(R.id.txtQuatProtod);
             discont = itemView.findViewById(R.id.txtDiscont);
             totalPrince = itemView.findViewById(R.id.txtTotalPrince);
             observation = itemView.findViewById(R.id.txtObservation);
             status = itemView.findViewById(R.id.txtStatus);
+            deliveryCost = itemView.findViewById(R.id.txtDeliveryCost);
 
         }
     }
