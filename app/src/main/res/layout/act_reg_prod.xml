@@ -89,55 +89,60 @@
         <EditText
             android:id="@+id/edtNameProd"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
+            android:background="@color/colorSilver"
             android:ems="10"
             android:hint="@string/hint_name_prod"
             android:inputType="textPersonName"
             android:padding="2dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorHintText" />
+            android:textColor="@color/colorSmoky"
+            android:textColorHint="@color/colorSmoky" />
 
         <EditText
             android:id="@+id/edtDiscriptionProd"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
+            android:background="@color/colorSilver"
             android:ems="10"
             android:hint="@string/txt_decrition"
             android:inputType="textPersonName"
             android:padding="2dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorHintText" />
+            android:textColor="@color/colorSmoky"
+            android:textColorHint="@color/colorSmoky" />
 
         <EditText
             android:id="@+id/edtUrl"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
+            android:background="@color/colorSilver"
             android:ems="10"
             android:hint="@string/txt_url_img"
             android:inputType="textPersonName"
             android:padding="2dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorHintText" />
+            android:textColor="@color/colorSmoky"
+            android:textColorHint="@color/colorSmoky" />
 
         <EditText
             android:id="@+id/edtNumberPro"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="40dp"
+            android:background="@color/colorSilver"
             android:ems="10"
             android:hint="@string/txt_number_prod"
             android:inputType="textPersonName"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorHintText" />
+            android:textColor="@color/colorSmoky"
+            android:textColorHint="@color/colorSmoky" />
 
         <EditText
             android:id="@+id/edtValProd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@color/colorSilver"
             android:ems="10"
-            android:hint="@string/txt_price_prod"
+            android:hint="@string/txt_ex_valor"
             android:inputType="textPersonName"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorHintText" />
+            android:textColor="@color/colorSmoky"
+            android:textColorHint="@color/colorSmoky" />
 
         <TextView
             android:id="@+id/textView12"

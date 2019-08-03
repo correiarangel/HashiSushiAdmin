@@ -39,7 +39,7 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	
 	private static final int SELECAO_GALERIA = 200;
 	private String[] type = { "Entrada", "Pratos", "Monte_Prato",
-			"Temakis", "Combo", "Porções", "Bebidas" };
+			"Temakis", "Combo", "Porções", "Bebidas","Adicionais" };
 	private String[] isPromotion = { "Não", "Sim" };
 	private Spinner spnType;
 	private Spinner spnIsPrmotion;

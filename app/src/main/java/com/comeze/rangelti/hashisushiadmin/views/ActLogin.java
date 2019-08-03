@@ -51,7 +51,7 @@ public class ActLogin extends AppCompatActivity implements View.OnClickListener 
         }
 
         startDB();
-       // testUserCurrent();
+        testUserCurrent();
     }
 
     @Override

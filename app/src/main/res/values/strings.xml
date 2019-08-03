@@ -164,5 +164,6 @@
     <string name="txt_qt_vendas">Qt.Pedidos:</string>
     <string name="txt_order_id">Pedido:</string>
     <string name="menu_cust_entrega">COFIG.CUSTO ENTREGA</string>
+    <string name="txt_ex_valor">Use ponto para valor ex: 12.98  </string>
 
 </resources>
