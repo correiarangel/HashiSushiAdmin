@@ -204,12 +204,9 @@ public class ActPedidosConfirm extends AppCompatActivity  {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Orders orders = dataSnapshot.getValue(Orders.class);
 
-
-                ordersList.add(orders);
-
-                adapterOrders.notifyDataSetChanged();
-
                 notificacao();
+                ordersList.add(orders);
+                adapterOrders.notifyDataSetChanged();
             }
 
             @Override

@@ -2,15 +2,25 @@ package com.comeze.rangelti.hashisushiadmin.views;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -24,12 +34,15 @@ import android.widget.Toast;
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 import com.comeze.rangelti.hashisushiadmin.model.Costs;
+import com.comeze.rangelti.hashisushiadmin.model.Orders;
 import com.comeze.rangelti.hashisushiadmin.model.User;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -58,6 +71,7 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
         initDB();
         retornIdUser = UserFirebase.getIdUser();
         recoveryDataUser();
+        listesnerEventPedidos();//escuta pedidos
 
     }
 
@@ -278,6 +292,84 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
             return 1;
         } else return 0;
     }
+
+    public void listesnerEventPedidos(){
+
+        //retorna usuarios
+        DatabaseReference pedidosDB = reference.child("orders");
+        //retorna o no setado
+        Query querySearch = pedidosDB.orderByChild("status").equalTo("confirmado");
+
+        querySearch.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Orders orders = dataSnapshot.getValue(Orders.class);
+                notificacao();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                // Orders orders = dataSnapshot.getValue(Orders.class);
+                // System.out.println("PEDIDO MODOU Status-------  "+orders.getStatus());
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                //Orders orders = dataSnapshot.getValue(Orders.class);
+                //System.out.println("PEDIDO REMOVIDO-------  "+orders.getStatus());
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void notificacao( ){
+
+
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        PendingIntent p = PendingIntent.getActivity(this,0, new Intent(this,ActPedidosConfirm.class),0 );
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setTicker("Pedido Novo");
+        builder.setContentTitle(" Chegou Pedido !");
+
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources() ,R.mipmap.ic_launcher));
+        builder.setContentIntent(p);
+
+        NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
+        String[] descs = new String[]{"Cheque a lista de pedido um novo pedido chegou !"};
+        for(int i = 0;i < descs.length; i++){
+            style.addLine(descs[i]);
+        }
+        builder.setStyle(style);
+
+        Notification no = builder.build();
+        no.vibrate = new long[]{150,300,150};
+        no.flags = Notification.FLAG_AUTO_CANCEL;
+        nm.notify(R.mipmap.ic_launcher,no);
+
+        try {
+            Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone toque = RingtoneManager.getRingtone(this,som);
+            toque.play();
+        }catch (Exception e){
+
+            System.out.println("Erro ao gerar toque notificação : "+e);
+        }
+    }
+
 }
 
 
