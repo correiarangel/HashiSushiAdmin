@@ -22,11 +22,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterProduct;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
+import com.comeze.rangelti.hashisushiadmin.model.Costs;
 import com.comeze.rangelti.hashisushiadmin.model.Product;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -326,9 +328,80 @@ public class ActProdutos extends AppCompatActivity {
             finish();
             return true;
         }
+        if (id == R.id.menu_info)
+        {
+            Intent it = new Intent(this, ActInfo.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+        if (id == R.id.menu_ped_entregando)
+        {
+
+            Intent it = new Intent(this, ActEntregando.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+        if (id == R.id.menu_custo)
+        {
+            configCost();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
+    // dialog para configura valor de entrega
+    public void configCost ( ) {
 
+        AlertDialog.Builder alert = new AlertDialog.Builder ( this );
+        alert.setTitle ( "Custo de entrega" );
+        alert.setMessage ( "\nConfigure o custo de sua entrega." );
+
+
+        final EditText editCustoEntrega = new EditText ( this );
+
+        LinearLayout layoutFilds = new LinearLayout ( this );
+        layoutFilds.setOrientation ( LinearLayout.VERTICAL );
+
+        layoutFilds.addView ( editCustoEntrega );
+        editCustoEntrega.setHint ( "Digite somente valor monetario" );
+
+        alert.setView ( layoutFilds );
+
+
+        alert.setPositiveButton ( "Salvar Custo", new DialogInterface.OnClickListener ( ) {
+            @Override
+            public void onClick ( DialogInterface dialog, int which ) {
+
+                String custoEntrega = editCustoEntrega.getText ( ).toString ( );
+
+                if ( validaValor( custoEntrega ) == 1 ) {
+
+                    msgShort ( "Atenção campo vazio ou valor incorreto !" );
+
+                } else {
+                    msgShort ( "Custo de entrega salvo com sucesso !" );
+                    //instacia Costs e seta e salva valor
+                    Costs costs = new Costs();
+                    costs.editarCusto( custoEntrega );
+                }
+            }
+        } );
+
+        alert.setNegativeButton ( "Cancelar", new DialogInterface.OnClickListener ( ) {
+            @Override
+            public void onClick ( DialogInterface dialog, int which ) { } } );
+        AlertDialog dialog = alert.create ( );
+        dialog.show ( );
+    }
+
+    private int validaValor ( String valor ) {//valida se o valor digitado é numérico
+        String regexStr = "^(([1-9]\\d{0,2}(\\.\\d{3})*)|(([1-9]\\.\\d*)?\\d))(\\,\\d\\d)?";
+        if ( !valor.trim ( ).matches ( regexStr ) ) {
+            msgShort ( "Por favor, informe um valor monetario :=[" );
+            return 1;
+        } else return 0;
+    }
 }

@@ -16,6 +16,9 @@
         android:id="@+id/menu_ped_andamento"
         android:title="@string/menu_p_andamento" />
     <item
+        android:id="@+id/menu_ped_entregando"
+        android:title="@string/menu_entregando" />
+    <item
         android:id="@+id/menu_cadastrar_prod"
         android:orderInCategory="100"
         android:title="@string/menu_cadastrar_prod"
@@ -37,7 +40,6 @@
         android:id="@+id/menu_usuarios"
         android:orderInCategory="100"
         android:title="@string/menu_usuarios"
-        android:visible="true"
         app:showAsAction="never" />
 
     <item

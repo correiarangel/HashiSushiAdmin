@@ -188,6 +188,19 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
             msgShort("Já estamos em Home !");
             return true;
         }
+        if (id == R.id.menu_ped_entregando)
+        {
+
+            Intent it = new Intent(this, ActEntregando.class);
+            startActivity(it);
+            return true;
+        }
+        if (id == R.id.menu_info)
+        {
+            Intent it = new Intent(this, ActInfo.class);
+            startActivity(it);
+            return true;
+        }
         if (id == R.id.menu_custo)
         {
             configCost();
@@ -240,7 +253,7 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
     }
 
     // dialog para configura valor de entrega
-    private void configCost ( ) {
+    public void configCost ( ) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder ( this );
         alert.setTitle ( "Custo de entrega" );

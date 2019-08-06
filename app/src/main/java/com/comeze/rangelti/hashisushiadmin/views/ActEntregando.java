@@ -2,28 +2,18 @@ package com.comeze.rangelti.hashisushiadmin.views;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.NotificationCompat;
-import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -53,7 +43,7 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class ActPedidosConfirm extends AppCompatActivity  {
+public class ActEntregando extends AppCompatActivity {
 
     private DatabaseReference reference;
     private List<Orders> ordersList = new ArrayList<>();;
@@ -65,11 +55,11 @@ public class ActPedidosConfirm extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_pedidos_confirm);
+        setContentView(R.layout.act_entregando);
 
         ActionBar bar = getSupportActionBar();
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
-        bar.setTitle("Pedidos Confirmados");
+        bar.setTitle("Pedidos em entraga");
 
         startComponet();
         initDB();
@@ -137,7 +127,7 @@ public class ActPedidosConfirm extends AppCompatActivity  {
 
 
         final EditText edtStatus = new EditText(this);
-        edtStatus.setText("em preparo");
+        edtStatus.setText("entregue");
 
         alert.setView(edtStatus);
 
@@ -147,7 +137,7 @@ public class ActPedidosConfirm extends AppCompatActivity  {
             public void onClick(DialogInterface dialog, int which) {
 
 
-                 String status = edtStatus.getText().toString();
+                String status = edtStatus.getText().toString();
 
                 orders = new Orders();
                 orders.editStatus( status,pedidoSelecionado.getIdOrders());
@@ -190,7 +180,7 @@ public class ActPedidosConfirm extends AppCompatActivity  {
 
     public void initDB()
     {
-        FirebaseApp.initializeApp(ActPedidosConfirm.this);
+        FirebaseApp.initializeApp(ActEntregando.this);
         this.reference = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -199,22 +189,21 @@ public class ActPedidosConfirm extends AppCompatActivity  {
         //retorna usuarios
         DatabaseReference pedidosDB = reference.child("orders");
         //retorna o no setado
-        Query querySearch = pedidosDB.orderByChild("status").equalTo("confirmado");
+        Query querySearch = pedidosDB.orderByChild("status").equalTo("saiu p. entrega");
 
         querySearch.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Orders orders = dataSnapshot.getValue(Orders.class);
 
-                notificacao();
                 ordersList.add(orders);
                 adapterOrders.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-               // Orders orders = dataSnapshot.getValue(Orders.class);
-               // System.out.println("PEDIDO MODOU Status-------  "+orders.getStatus());
+                // Orders orders = dataSnapshot.getValue(Orders.class);
+                // System.out.println("PEDIDO MODOU Status-------  "+orders.getStatus());
 
             }
 
@@ -224,16 +213,11 @@ public class ActPedidosConfirm extends AppCompatActivity  {
                 //System.out.println("PEDIDO REMOVIDO-------  "+orders.getStatus());
 
             }
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { }
 
             @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
 
     }
@@ -241,51 +225,16 @@ public class ActPedidosConfirm extends AppCompatActivity  {
     private void msgShort(String msg)
     {                   //totalVenda = o.getTotalPrince();
 
-                    //totalDevendas = totalVenda * quantVendas;
+        //totalDevendas = totalVenda * quantVendas;
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
 
-private void startItem(){
-    Intent it = new Intent(this, ActItensOrder.class);
-    startActivity(it);
-}
-
-    private void notificacao( ){
-
-
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        PendingIntent p = PendingIntent.getActivity(this,0, new Intent(this,ActPedidosConfirm.class),0 );
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setTicker("Pedido Novo");
-        builder.setContentTitle(" Chegou Pedido !");
-
-        builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources() ,R.mipmap.ic_launcher));
-        builder.setContentIntent(p);
-
-        NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
-        String[] descs = new String[]{"Cheque a lista de pedido um novo pedido chegou !"};
-        for(int i = 0;i < descs.length; i++){
-            style.addLine(descs[i]);
-        }
-        builder.setStyle(style);
-
-        Notification no = builder.build();
-        no.vibrate = new long[]{150,300,150};
-        no.flags = Notification.FLAG_AUTO_CANCEL;
-        nm.notify(R.mipmap.ic_launcher,no);
-
-        try {
-            Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone toque = RingtoneManager.getRingtone(this,som);
-            toque.play();
-        }catch (Exception e){
-
-            System.out.println("Erro ao gerar toque notificação : "+e);
-        }
+    private void startItem(){
+        Intent it = new Intent(this, ActItensOrder.class);
+        startActivity(it);
     }
+
 
     //==> MENUS
     @Override
@@ -348,24 +297,22 @@ private void startItem(){
         }
         if (id == R.id.menu_pedidos_confirm)
         {
-            msgShort("Já estamos em Pedidos confirmados !");
-            return true;
+           Intent it = new Intent(this,ActPedidosConfirm.class);
+           return true;
         }
         if (id == R.id.menu_home)
         {
             finish();
             return true;
         }
-        if (id == R.id.menu_ped_entregando)
-        {
-
-            Intent it = new Intent(this, ActEntregando.class);
-            startActivity(it);
-            return true;
-        }
         if (id == R.id.menu_custo)
         {
             configCost();
+            return true;
+        }
+        if (id == R.id.menu_ped_entregando)
+        {
+            msgShort("Já estamos em saiu para entrega !");
             return true;
         }
 
@@ -424,5 +371,4 @@ private void startItem(){
             return 1;
         } else return 0;
     }
-
 }

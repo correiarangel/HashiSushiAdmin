@@ -362,6 +362,20 @@ public class ActEditarUser extends AppCompatActivity  implements View.OnClickLis
             finish();
             return true;
         }
+        if (id == R.id.menu_ped_entregando)
+        {
+            Intent it = new Intent(this, ActEntregando.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
+        if (id == R.id.menu_info)
+        {
+            Intent it = new Intent(this, ActInfo.class);
+            startActivity(it);
+            finish();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

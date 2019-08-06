@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".views.ActInfo"></activity>
+        <activity android:name=".views.ActEntregando" />
         <activity android:name=".views.ActPedidos" />
         <activity android:name=".views.ActPedPreparo" />
         <activity android:name=".views.ActEditarUser" />
