@@ -25,6 +25,12 @@ out/
 # Gradle files
 .gradle/
 build/
+admin/
+*.jks
+*.pepk
+admin/
+adminkey.jks
+private_key.pepk
 
 # Local configuration file (sdk path, etc)
 local.properties
