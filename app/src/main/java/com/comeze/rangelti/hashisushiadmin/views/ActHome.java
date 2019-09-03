@@ -47,6 +47,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
+//app center
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
+
 public class ActHome extends AppCompatActivity implements View.OnClickListener {
 
     private DatabaseReference reference;
@@ -72,7 +77,9 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
         retornIdUser = UserFirebase.getIdUser();
         recoveryDataUser();
         listesnerEventPedidos();//escuta pedidos
-
+    
+        AppCenter.start(getApplication(), "932cfb85-f2d8-4a22-a32c-516f23b9ceb8",
+                Analytics.class, Crashes.class);
     }
 
     @Override
