@@ -112,14 +112,14 @@
     <string name="menu_send">Send</string>
     <string name="menu_pont">MEUS PONTOS</string>
     <string name="txt_regirter_prod">Cadastro de produto</string>
-    <string name="txt_number_prod">Nº Produto</string>
+    <string name="txt_number_prod">Informe o nº do produto</string>
     <string name="hint_name_prod">Informe o nome do produto</string>
     <string name="txt_name_prod">Nome do Produto:</string>
-    <string name="txt_decrition">Descrição:</string>
+    <string name="txt_decrition">Informe a descrição do produto</string>
     <string name="txt_price_prod">Valor R$:</string>
-    <string name="txt_type">Selecione o tipo:</string>
-    <string name="txt_Is_promotion">Esta em promoção:</string>
-    <string name="txt_url_img">URL imagem produto:</string>
+    <string name="txt_type">Selecione o tipo do produto:</string>
+    <string name="txt_Is_promotion">Esse produto está em promoção?</string>
+    <string name="txt_url_img">Cole aqui a URL da imagem do produto</string>
     <string name="txt_splash">Fast Delivery</string>
     <string name="txt_splash_fone">19 9.8605-6578</string>
     <string name="vgs">Vargem Grande do Sul</string>
@@ -164,7 +164,7 @@
     <string name="txt_qt_vendas">Qt.Pedidos:</string>
     <string name="txt_order_id">Pedido:</string>
     <string name="menu_cust_entrega">COFIG.CUSTO ENTREGA</string>
-    <string name="txt_ex_valor">Use ponto para valor ex: 12.98  </string>
+    <string name="txt_ex_valor">Informe o valor do produto</string>
     <string name="menu_entregando">SAIU P. ENTREGA</string>
 
 </resources>
