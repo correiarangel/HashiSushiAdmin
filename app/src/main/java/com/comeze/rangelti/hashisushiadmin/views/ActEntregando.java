@@ -261,10 +261,10 @@ public class ActEntregando extends AppCompatActivity {
 
         if (id == R.id.menu_usuarios)
         {
-            Intent it = new Intent(this, ActUsuarios.class);
-            startActivity(it);
-            finish();
-            return true;
+            //Intent it = new Intent(this, ActUsuarios.class);
+            // startActivity(it);
+            // finish();
+            // return true;
         }
 
         if (id == R.id.menu_cadastrar_prod)
@@ -312,7 +312,7 @@ public class ActEntregando extends AppCompatActivity {
         }
         if (id == R.id.menu_ped_entregando)
         {
-            msgShort("Já estamos em saiu para entrega !");
+            msgShort("Você já está em Saiu p/ Entrega!");
             return true;
         }
 

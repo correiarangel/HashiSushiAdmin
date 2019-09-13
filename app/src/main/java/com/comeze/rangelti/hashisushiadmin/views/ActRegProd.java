@@ -39,7 +39,7 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	
 	private static final int SELECAO_GALERIA = 200;
 	private String[] type = { "Entrada", "Pratos", "Monte_Prato",
-			"Temakis", "Combo", "Porções", "Bebidas","Adicionais" };
+			"Temakis", "Combo", "Porções", "Bebidas", "Adicionais" };
 	private String[] isPromotion = { "Não", "Sim" };
 	private Spinner spnType;
 	private Spinner spnIsPrmotion;
@@ -65,17 +65,17 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	protected void onCreate ( Bundle savedInstanceState ) {
 		super.onCreate ( savedInstanceState );
 		setContentView ( R.layout.act_reg_prod );
-
-		ActionBar bar = getSupportActionBar();
-		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
-		bar.setTitle("Cadastrar Produto");
+		
+		ActionBar bar = getSupportActionBar ( );
+		bar.setBackgroundDrawable ( new ColorDrawable ( Color.parseColor ( "#000000" ) ) );
+		bar.setTitle ( "Cadastro de Produtos" );
 		
 		startCompnent ( );
 		
 		isPromotionSpn ( );
 		typeSpn ( );
 		startDB ( );
-
+		
 		flotBntSaveReg.setOnClickListener ( this );
 		flotBntNewReg.setOnClickListener ( this );
 		flotBntExitReg.setOnClickListener ( this );
@@ -88,12 +88,10 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 			}
 		} );
 		
-		
 		extrasProd = getIntent ( ).getExtras ( );
 		if ( extrasProd != null ) {
 			recebeProduto ( );
 		}
-		
 	}
 	
 	private void getImage ( ) {
@@ -125,7 +123,6 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	}
 	
 	private void startCompnent ( ) {
-		
 		spnType = findViewById ( R.id.spnType );
 		spnIsPrmotion = findViewById ( R.id.spnIsPrmotion );
 		
@@ -174,7 +171,6 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	}
 	
 	private void msgShort ( String msg ) {
-		
 		Toast.makeText ( getApplicationContext ( ), msg, Toast.LENGTH_SHORT ).show ( );
 	}
 	
@@ -187,24 +183,22 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 	
 	@Override
 	public void onClick ( View v ) {
-
-		if ( v.getId ( ) == R.id.flotBntNewReg ) {
-			
-			startVibrate ( 90 );
-			clearFilds ( );
-			
-		}
-		if ( v.getId ( ) == R.id.flotBntSaveReg ) {
-			
-			startVibrate ( 90 );
-			addProd ( );
-			clearFilds ( );
-		}
-		if ( v.getId ( ) == R.id.flotBntExitReg ) {
-			
-			startVibrate ( 90 );
-			finish ( );
-			
+		switch ( v.getId ( ) ) {
+			case R.id.flotBntNewReg:
+				startVibrate ( 90 );
+				clearFilds ( );
+				break;
+				
+			case R.id.flotBntSaveReg:
+				startVibrate ( 90 );
+				addProd ( );
+				clearFilds ( );
+				break;
+				
+			case R.id.flotBntExitReg:
+				startVibrate ( 90 );
+				finish ( );
+				break;
 		}
 	}
 	
@@ -218,7 +212,7 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 		
 		if ( descricao.equals ( "" ) && numberProd.equals ( "" ) && name.equals ( "" ) &&
 				url.equals ( "" ) && valProd.equals ( "" ) ) {
-			msgShort ( "Há campos sem valor;Preencha todos os campos !" );
+			msgShort ( "Há campos sem valor! Por favor, preencha todos os campos." );
 		} else {
 			try {
 				Product p = new Product ( );
@@ -230,7 +224,7 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 				p.setIdInterno ( idIntenoProduto );
 				//captura resposta
 				String strProm = spnIsPrmotion.getSelectedItem ( ).toString ( );
-
+				
 				boolean boolPromo = false;
 				// se sim retor true
 				boolPromo = strProm.equals ( "Sim" );
@@ -248,12 +242,12 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 					p.salvar ( );
 				}
 				
-				msgShort ( "Produto salvo com sucesso!.." );
+				msgShort ( "Cadastro realizado com sucesso!" );
 				
 				clearFilds ( );
 				
 			} catch ( Exception erro ) {
-				msgShort ( "Erro na gravação de produto ERRO : " + erro );
+				msgShort ( "Erro na gravação de produto! Erro: " + erro );
 			}
 		}
 	}
@@ -306,23 +300,19 @@ public class ActRegProd extends AppCompatActivity implements View.OnClickListene
 							urlImagemSelecionada = taskSnapshot.getDownloadUrl ( ).toString ( );
 							
 							edtUrl.setText ( urlImagemSelecionada );
-							msgShort ( "Sucesso ao fazer upload da imagem !" );
+							msgShort ( "Sucesso ao carregar a imagem!" );
 						}
 					} );
-					
 				}
 				
 			} catch ( Exception e ) {
 				e.printStackTrace ( );
 			}
-			
 		}
-		
 	}
 	
 	//recebe produto selecionado para edição
 	private void recebeProduto ( ) {
-		
 		
 		if ( extrasProd != null ) {
 			product = ( Product ) extrasProd.getSerializable ( "PRODUTO_ENV" );

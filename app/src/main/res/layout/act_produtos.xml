@@ -7,8 +7,6 @@
     android:background="@color/colorSmoky"
     tools:context=".views.ActProdutos">
 
-
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_Orders"
         android:layout_width="0dp"

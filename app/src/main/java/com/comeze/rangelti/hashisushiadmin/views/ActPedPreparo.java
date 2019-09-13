@@ -254,10 +254,10 @@ public class ActPedPreparo extends AppCompatActivity {
 
         if (id == R.id.menu_usuarios)
         {
-            Intent it = new Intent(this, ActUsuarios.class);
-            startActivity(it);
-            finish();
-            return true;
+            //   Intent it = new Intent(this, ActUsuarios.class);
+            //   startActivity(it);
+            //   finish();
+            //  return true;
         }
 
         if (id == R.id.menu_cadastrar_prod)
