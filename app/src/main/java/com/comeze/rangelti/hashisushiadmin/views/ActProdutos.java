@@ -188,7 +188,7 @@ public class ActProdutos extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-                msgShort("Houve algum erro:" + databaseError);
+                System.out.println("Houve algum erro:" + databaseError);
             }
         });
     }
@@ -221,9 +221,7 @@ public class ActProdutos extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) { }
         });
     }
     private void startEditProd(Product product){
@@ -289,10 +287,10 @@ public class ActProdutos extends AppCompatActivity {
 
         if (id == R.id.menu_usuarios)
         {
-            Intent it = new Intent(this, ActUsuarios.class);
-            startActivity(it);
-            finish();
-            return true;
+               Intent it = new Intent(this, ActUsuarios.class);
+               startActivity(it);
+               finish();
+               return true;
         }
 
         if (id == R.id.menu_cadastrar_prod)

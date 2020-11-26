@@ -81,7 +81,6 @@ public class ActEntregando extends AppCompatActivity {
     {
         //Adiciona evento de clique no recyclerview
         list_Orders.addOnItemTouchListener(
-
                 new RecyclerItemClickListener(
                         this,
                         list_Orders,
@@ -93,7 +92,6 @@ public class ActEntregando extends AppCompatActivity {
                                 confirmStatus(pedidoSelecionado,position);
 
                             }
-
                             @Override
                             public void onLongItemClick(View view, int position) {
 
@@ -106,11 +104,8 @@ public class ActEntregando extends AppCompatActivity {
                                 startItem();
 
                             }
-
                             @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                            }
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { }
 
                         }
                 )
@@ -172,10 +167,8 @@ public class ActEntregando extends AppCompatActivity {
 
     private void startComponet()
     {
-
         //RecyclerView---
         list_Orders = findViewById(R.id.list_Orders);
-
     }
 
     public void initDB()
@@ -223,9 +216,7 @@ public class ActEntregando extends AppCompatActivity {
     }
 
     private void msgShort(String msg)
-    {                   //totalVenda = o.getTotalPrince();
-
-        //totalDevendas = totalVenda * quantVendas;
+    {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -312,7 +303,7 @@ public class ActEntregando extends AppCompatActivity {
         }
         if (id == R.id.menu_ped_entregando)
         {
-            msgShort("Já estamos em saiu para entrega !");
+            msgShort("Você já está em Saiu p/ Entrega!");
             return true;
         }
 

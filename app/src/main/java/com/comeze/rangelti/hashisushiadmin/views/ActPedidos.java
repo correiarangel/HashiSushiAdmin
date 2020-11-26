@@ -220,7 +220,7 @@ public class ActPedidos extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-                msgShort("Houve algum erro:" + databaseError);
+                System.out.println("Houve algum erro:" + databaseError);
             }
         });
     }
@@ -278,7 +278,7 @@ public class ActPedidos extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                msgShort("Busca cancelada !");
+                System.out.println("Busca cancelada !");
             }
         });
     }
@@ -379,10 +379,10 @@ public class ActPedidos extends AppCompatActivity {
 
         if (id == R.id.menu_usuarios)
         {
-            Intent it = new Intent(this, ActUsuarios.class);
-            startActivity(it);
-            finish();
-            return true;
+             Intent it = new Intent(this, ActUsuarios.class);
+             startActivity(it);
+             finish();
+             return true;
         }
 
         if (id == R.id.menu_cadastrar_prod)

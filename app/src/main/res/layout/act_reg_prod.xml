@@ -93,7 +93,7 @@
             android:background="@color/colorSilver"
             android:ems="10"
             android:hint="@string/hint_name_prod"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textCapSentences"
             android:padding="2dp"
             android:textColor="@color/colorSmoky"
             android:textColorHint="@color/colorSmoky" />
@@ -117,7 +117,7 @@
             android:background="@color/colorSilver"
             android:ems="10"
             android:hint="@string/txt_url_img"
-            android:inputType="textPersonName"
+            android:inputType="textUri"
             android:padding="2dp"
             android:textColor="@color/colorSmoky"
             android:textColorHint="@color/colorSmoky" />
@@ -129,20 +129,21 @@
             android:background="@color/colorSilver"
             android:ems="10"
             android:hint="@string/txt_number_prod"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:textColor="@color/colorSmoky"
             android:textColorHint="@color/colorSmoky" />
 
-        <EditText
+        <com.vicmikhailau.maskededittext.MaskedEditText
             android:id="@+id/edtValProd"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/colorSilver"
             android:ems="10"
             android:hint="@string/txt_ex_valor"
-            android:inputType="textPersonName"
+            android:inputType="numberDecimal"
             android:textColor="@color/colorSmoky"
-            android:textColorHint="@color/colorSmoky" />
+            android:textColorHint="@color/colorSmoky"
+            app:mask="##,##"/>
 
         <TextView
             android:id="@+id/textView12"

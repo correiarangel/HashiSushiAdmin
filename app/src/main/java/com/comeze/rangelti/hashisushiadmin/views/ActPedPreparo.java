@@ -134,7 +134,6 @@ public class ActPedPreparo extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-
                 String status = edtStatus.getText().toString();
 
                 orders = new Orders();
@@ -149,9 +148,7 @@ public class ActPedPreparo extends AppCompatActivity {
         {
             @Override
             public void onClick(DialogInterface dialog, int which)
-            {
-
-            }
+            {  }
         });
         AlertDialog dialog = alert.create();
         dialog.show();
@@ -199,16 +196,10 @@ public class ActPedPreparo extends AppCompatActivity {
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                //Orders orders = dataSnapshot.getValue(Orders.class);
-               // System.out.println("PEDIDO MODOU Status-------  "+orders.getStatus());
-            }
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { }
 
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                //Orders orders = dataSnapshot.getValue(Orders.class);
-                //System.out.println("PEDIDO REMOVIDO-------  "+orders.getStatus());
-            }
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { }

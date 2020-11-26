@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.comeze.rangelti.hashisushiadmin.R;
 import com.comeze.rangelti.hashisushiadmin.adapter.AdapterUsers;
+import com.comeze.rangelti.hashisushiadmin.dao.UserFirebase;
 import com.comeze.rangelti.hashisushiadmin.listener.RecyclerItemClickListener;
 import com.comeze.rangelti.hashisushiadmin.model.Costs;
 import com.comeze.rangelti.hashisushiadmin.model.User;
@@ -65,14 +66,14 @@ public class ActUsuarios extends AppCompatActivity {
         bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
         bar.setTitle("Usuarios");
 
+        startDB();
         startComponet();
-        initDB();
 
         recyclerViewConfig();
         recycleOnclick();
 
-
-        this.auth = FirebaseAuth.getInstance();
+        //retornIdUser = UserFirebase.getIdUser ( );
+       // this.auth = FirebaseAuth.getInstance();
         retornaUsers();
     }
 
@@ -109,13 +110,10 @@ public class ActUsuarios extends AppCompatActivity {
 
                                 confirmExclusao(userSelecionado);
 
-                                // msgShort("Produto :"+produtoSelecionado);
                             }
 
                             @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                            }
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { }
 
                         }
                 )
@@ -165,7 +163,7 @@ public class ActUsuarios extends AppCompatActivity {
         atvib.vibrate(time);
     }
 
-    public void initDB()
+    public void startDB()
     {
         FirebaseApp.initializeApp(ActUsuarios.this);
         this.reference = FirebaseDatabase.getInstance().getReference();
@@ -182,6 +180,7 @@ public class ActUsuarios extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
+
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren())
                 {
                     User u = objSnapshot.getValue(User.class);
@@ -193,7 +192,7 @@ public class ActUsuarios extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-                msgShort("Houve algum erro:" + databaseError);
+                System.out.println("Houve algum erro:" + databaseError);
             }
         });
     }

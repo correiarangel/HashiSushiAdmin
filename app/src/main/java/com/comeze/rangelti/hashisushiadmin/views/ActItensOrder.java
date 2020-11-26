@@ -131,7 +131,7 @@ public class ActItensOrder extends AppCompatActivity {
     {
         //retorna pedido
         DatabaseReference pedidosDB = reference.child("orders");
-        //retorna o no setado
+        //retorna ped setado
         final Query querySearch = pedidosDB.orderByChild("idOrders").equalTo(idOrder);
 
         //cria um ouvinte
