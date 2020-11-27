@@ -229,10 +229,9 @@ public class ActPedidosConfirm extends AppCompatActivity {
 			String title = "Novo Pedido";
 			String CHANNEL_DESCRIPTION = "Cheque a lista de pedido... " ; //ms
 			String body = CHANNEL_DESCRIPTION  ; //title
-			String type = "Status"; //tipo
 			String CHANNEL_NAME = title; //title
 			//Set pending intent to builder
-			Intent intent = new Intent(getApplicationContext(), ActHome.class);
+			Intent intent = new Intent(getApplicationContext(), ActPedidosConfirm.class);
 			PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
 			//Notification builder
@@ -262,7 +261,7 @@ public class ActPedidosConfirm extends AppCompatActivity {
 						.setAutoCancel(true)
 						.setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
 						.setDefaults(Notification.DEFAULT_ALL);
-				notificationTypeTwo();
+				//notificationTypeTwo();
 			}else {
 				mBuilder = new NotificationCompat.Builder(this);
 				mBuilder.setContentTitle(title)
@@ -273,13 +272,13 @@ public class ActPedidosConfirm extends AppCompatActivity {
 						.setAutoCancel(true)
 						.setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
 						.setDefaults(Notification.DEFAULT_VIBRATE);
-				notificationTypeTwo();
+				//notificationTypeTwo();
 			}
 
 			notificationManager.notify(1002, mBuilder.build());
 		}
 	
-	private void notificationTypeTwo ( ) {
+/*	private void notificationTypeTwo ( ) {
 		//Cria o gerador do AlertDialog
 		AlertDialog.Builder builder = new AlertDialog.Builder ( this );
 		//define o titulo
@@ -303,7 +302,7 @@ public class ActPedidosConfirm extends AppCompatActivity {
 		alertaDialog = builder.create ( );
 		//Exibe
 		alertaDialog.show ( );
-	}
+	}*/
 	
 	//==> MENUS
 	@Override

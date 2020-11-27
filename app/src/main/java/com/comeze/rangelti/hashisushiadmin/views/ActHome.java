@@ -323,10 +323,9 @@ public class ActHome extends AppCompatActivity implements View.OnClickListener {
         String title = "Novo Pedido";
 		String CHANNEL_DESCRIPTION = "Cheque a lista de pedido... " ; //ms
 		String body = CHANNEL_DESCRIPTION  ; //title
-		String type = "Status"; //tipo
 		String CHANNEL_NAME = title; //title
 		//Set pending intent to builder
-		Intent intent = new Intent(getApplicationContext(), ActHome.class);
+		Intent intent = new Intent(getApplicationContext(), ActPedidosConfirm.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
 		//Notification builder
